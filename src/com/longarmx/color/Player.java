@@ -1,5 +1,7 @@
 package com.longarmx.color;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -11,9 +13,15 @@ public class Player implements Disposable{
 	
 	public TextureRegion player;
 	public TextureRegion shootTexture;
+	public TextureRegion lightning;
+	
+	private Game game;
+	int frame = 0;
 	
 	public float x;
 	public float y;
+	public int width = 50;
+	public int height = 50;
 	
 	public boolean redDown = false;
 	public boolean greenDown = false;
@@ -34,7 +42,8 @@ public class Player implements Disposable{
 	private Sound death;
 	private Sound shoot;
 	
-	public Player(){
+	public Player(Game game){
+		this.game = game;
 		create();
 	}
 	
@@ -44,6 +53,7 @@ public class Player implements Disposable{
 		isDead = false;
 		player = Util.getFromSpriteSheet(0, 0, 50, 50);
 		shootTexture = Util.getFromSpriteSheet(0, 128, 200, 10);
+		lightning = Util.getFromSpriteSheet(0, 127, 1, 1);
 		death = Gdx.audio.newSound(Gdx.files.internal("res/player_dead_drain.ogg"));
 		shoot = Gdx.audio.newSound(Gdx.files.internal("res/shoot.wav"));
 	}
@@ -52,8 +62,12 @@ public class Player implements Disposable{
 		update();
 		batch.enableBlending();
 		batch.setColor(new Color(red, green, blue, 1));
-		if(isShooting) batch.draw(shootTexture, x + player.getRegionWidth() * .75f, y + player.getRegionHeight()/2 - shootTexture.getRegionHeight()/2, Main.WIDTH - (x + player.getRegionWidth()/2), shootTexture.getRegionHeight());
-		batch.draw(player, x, y);
+		if(isShooting){
+			//batch.draw(shootTexture, x + player.getRegionWidth() * .75f, y + player.getRegionHeight()/2 - shootTexture.getRegionHeight()/2, Main.WIDTH - (x + player.getRegionWidth()/2), shootTexture.getRegionHeight());
+			makeLightning();
+			batch.draw(lightning, x + width, y + height/2, 0, 0, 1, 1, Main.WIDTH - x, 3, 0);
+		}
+		batch.draw(player, x, y, width, height);
 		batch.setColor(1, 1, 1, 1);
 	}
 	
@@ -82,8 +96,20 @@ public class Player implements Disposable{
 					green = 0;
 					blue = 0;
 				}
+				
 			}).start();
 		}
+	}
+	
+	private void makeLightning(){
+		if(frame % 5 == 0){
+			for(int i = 0; i < 30; i++){
+				int rotation = new Random().nextInt(45);
+				game.batch.draw(lightning, x + width + i*20, y + height/2, 0, 0, 1, 1, 100 - i*3, 1, rotation);
+				game.batch.draw(lightning, x + width + i*20 + 7, y + height/2, 0, 0, 1, 1, 100 - i*3, 1, -rotation);
+			}
+		}
+		frame++;
 	}
 	
 	private void setColor(){

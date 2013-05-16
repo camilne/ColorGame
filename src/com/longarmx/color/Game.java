@@ -25,11 +25,11 @@ public class Game implements ApplicationListener{
 		Gdx.input.setInputProcessor(new Input(this));
 		batch = new SpriteBatch();
 		background = Util.loadTexture("res/background.png");
-		player = new Player();
+		player = new Player(this);
 		ui = new UI(this);
 		enemies.add(new Enemy(this));
 		Runtime runtime = Runtime.getRuntime();
-		System.out.println("Total RAM used: " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024*1024)) + "mb / " + (runtime.maxMemory()/(1024*1024)) + "mb");
+		System.out.println("Total RAM used: " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024*1024)) + "MB");
 	}
 	
 	public void reset(){
@@ -37,7 +37,7 @@ public class Game implements ApplicationListener{
 			enemies.remove(i);
 		}
 		enemies.add(new Enemy(this));
-		player = new Player();
+		player = new Player(this);
 		Config.ENEMY_SPEED = 1.0f;
 		level = 1;
 		score = 0;
