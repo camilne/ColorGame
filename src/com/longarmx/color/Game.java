@@ -25,9 +25,8 @@ public class Game implements ApplicationListener{
 		Gdx.input.setInputProcessor(new Input(this));
 		batch = new SpriteBatch();
 		background = Util.loadTexture("res/background.png");
-		player = new Player(this);
 		ui = new UI(this);
-		enemies.add(new Enemy(this));
+		reset();
 		Runtime runtime = Runtime.getRuntime();
 		System.out.println("Total RAM used: " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024*1024)) + "MB");
 	}
@@ -38,7 +37,7 @@ public class Game implements ApplicationListener{
 		}
 		enemies.add(new Enemy(this));
 		player = new Player(this);
-		Config.ENEMY_SPEED = 1.0f;
+		Enemy.SPEED = 1.0f;
 		level = 1;
 		score = 0;
 	}
@@ -66,10 +65,10 @@ public class Game implements ApplicationListener{
 			if(enemies.get(i).isDead){
 				score++;
 				enemies.remove(i);
-				Config.ENEMY_SPEED += .2f;
-				if(Config.ENEMY_SPEED < 2){
+				Enemy.SPEED += .2f;
+				if(Enemy.SPEED < 2){
 					level = 1;
-				}else if(Config.ENEMY_SPEED < 3){
+				}else if(Enemy.SPEED < 3){
 					level = 2;
 				}
 				enemies.add(new Enemy(this));

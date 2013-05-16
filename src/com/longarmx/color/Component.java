@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Component {
 	
-	private int x;
-	private int y;
-	private int width = 0;
-	private int height = 0;
-	public boolean selected = false;
+	protected int x;
+	protected int y;
+	protected int width = 0;
+	protected int height = 0;
 	
-	private TextureRegion texture;
-	private TextureRegion textureOverlay;
+	protected TextureRegion texture;
+	
+	protected boolean selected = false;
 	
 	public Game game;
 	
@@ -31,7 +31,6 @@ public class Component {
 	
 	public void create(int srcX, int srcY, int srcWidth, int srcHeight){
 		texture = Util.getFromSpriteSheet(srcX, srcY, srcWidth, srcHeight);
-		textureOverlay = Util.getFromSpriteSheet(srcX, srcY - srcHeight, srcWidth, srcHeight);
 		
 		if(width == 0) width = texture.getRegionWidth();
 		if(height == 0) height = texture.getRegionHeight();
@@ -40,12 +39,6 @@ public class Component {
 	public void render(SpriteBatch batch){
 		batch.enableBlending();
 		batch.draw(texture, x, y, width, height);
-		if(selected) batch.draw(textureOverlay, x, y, width, height);
-		batch.disableBlending();
-	}
-	
-	public void dispose(){
-		
 	}
 
 }

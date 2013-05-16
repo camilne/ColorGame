@@ -15,6 +15,8 @@ public class Enemy {
 	private Game game;
 	public boolean isDead = false;
 	
+	public static float SPEED = 1.0f;
+	
 	private TextureRegion texture;
 	
 	public Enemy(Game game){
@@ -38,13 +40,12 @@ public class Enemy {
 	
 	public void update(){
 		if(!game.player.isDead){
-			x-=Config.ENEMY_SPEED;
+			x-=SPEED;
 			if(x <= game.player.x + 50 + 10){
 				game.player.die();
 			}
 		}
 		if(game.player.isShooting){
-			//System.out.println("RED " + game.player.red + " : " + red + " GREEN " + game.player.green + " : " + green + " BLUE " + game.player.blue + " : " + blue);
 			if(game.player.red == red && game.player.green == green && game.player.blue == blue){
 				isDead = true;
 			}
@@ -65,37 +66,6 @@ public class Enemy {
 			red = Util.boolToFloat(random.nextBoolean());
 			green = Util.boolToFloat(random.nextBoolean());
 			blue = Util.boolToFloat(random.nextBoolean());
-		}
-	}
-	
-	public int getRandomColor(){
-		switch(Game.level){
-		case 1:
-			return getColor(random.nextInt(3));
-		}
-		return 0;
-	}
-	
-	public int getColor(int random){
-		switch(random){
-		case 0:
-			return Config.RED;
-		case 1:
-			return Config.GREEN;
-		case 2:
-			return Config.BLUE;
-		case 3:
-			return Config.MAGENTA;
-		case 4:
-			return Config.CYAN;
-		case 5:
-			return Config.YELLOW;
-		case 6:
-			return Config.WHITE;
-		case 7:
-			return Config.BLACK;
-		default:
-			return Config.BLACK;
 		}
 	}
 

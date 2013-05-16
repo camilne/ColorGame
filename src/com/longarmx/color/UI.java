@@ -16,17 +16,38 @@ public class UI implements Disposable{
 	
 	private Game game;
 	
+	private Button red;
+	private Button green;
+	private Button blue;
+	private Button dark;
+	private Button light;
+	
 	public UI(Game game){
 		this.game = game;
 		create();
 	}
 	
 	public void create(){
-		components.add(new Component(100, 100, buttonSize, buttonSize, 0, 169, 31, 31, game));
-		components.add(new Component(200, 100, buttonSize, buttonSize, 31, 169, 31, 31, game));
-		components.add(new Component(300, 100, buttonSize, buttonSize, 62, 169, 31, 31, game));
-		components.add(new Component(Main.WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize, 93, 169, 31, 31, game));
-		components.add(new Component(Main.WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize, 124, 169, 31, 31, game));
+		red = new Button(100, 100, buttonSize, buttonSize, game);
+		red.setColor(1, 0, 0, 1);
+		components.add(red);
+		
+		green = new Button(200, 100, buttonSize, buttonSize, game);
+		green.setColor(0, 1, 0, 1);
+		components.add(green);
+		
+		blue = new Button(300, 100, buttonSize, buttonSize, game);
+		blue.setColor(0, 0, 1, 1);
+		components.add(blue);
+		
+		dark = new Button(Main.WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize, game);
+		dark.setColor(.3f, .3f, .3f, 1);
+		components.add(dark);
+		
+		light = new Button(Main.WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize, game);
+		light.setColor(.8f, .8f, .8f, 1);
+		components.add(light);
+		
 		manager = FontManager.getInstance();
 	}
 	
@@ -34,20 +55,20 @@ public class UI implements Disposable{
 		for(Component component: components){
 			component.render(batch);
 		}
-		if(game.player.redDown) components.get(0).selected = true;
-		else components.get(0).selected = false;
+		if(game.player.redDown) red.selected = true;
+		else red.selected = false;
 		
-		if(game.player.greenDown) components.get(1).selected = true;
-		else components.get(1).selected = false;
+		if(game.player.greenDown) green.selected = true;
+		else green.selected = false;
 		
-		if(game.player.blueDown) components.get(2).selected = true;
-		else components.get(2).selected = false;
+		if(game.player.blueDown) blue.selected = true;
+		else blue.selected = false;
 		
-		if(game.player.darkDown) components.get(3).selected = true;
-		else components.get(3).selected = false;
+		if(game.player.darkDown) dark.selected = true;
+		else dark.selected = false;
 		
-		if(game.player.lightDown) components.get(4).selected = true;
-		else components.get(4).selected = false;
+		if(game.player.lightDown) light.selected = true;
+		else light.selected = false;
 		
 		manager.setColor(0, 0, 0, 1);
 		manager.draw("Score: " + String.valueOf(game.score), 10, Main.HEIGHT - 60, 5, batch);
@@ -60,9 +81,7 @@ public class UI implements Disposable{
 	
 	@Override
 	public void dispose(){
-		for(Component component: components){
-			component.dispose();
-		}
+		
 	}
 
 }
