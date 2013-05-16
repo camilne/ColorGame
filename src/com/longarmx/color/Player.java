@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Disposable;
 public class Player implements Disposable{
 	
 	public TextureRegion player;
-	public TextureRegion shootTexture;
 	public TextureRegion lightning;
 	
 	private Game game;
@@ -52,7 +51,6 @@ public class Player implements Disposable{
 		y = 300;
 		isDead = false;
 		player = Util.getFromSpriteSheet(0, 0, 50, 50);
-		shootTexture = Util.getFromSpriteSheet(0, 128, 200, 10);
 		lightning = Util.getFromSpriteSheet(0, 127, 1, 1);
 		death = Gdx.audio.newSound(Gdx.files.internal("res/player_dead_drain.ogg"));
 		shoot = Gdx.audio.newSound(Gdx.files.internal("res/shoot.wav"));
@@ -63,7 +61,6 @@ public class Player implements Disposable{
 		batch.enableBlending();
 		batch.setColor(new Color(red, green, blue, 1));
 		if(isShooting){
-			//batch.draw(shootTexture, x + player.getRegionWidth() * .75f, y + player.getRegionHeight()/2 - shootTexture.getRegionHeight()/2, Main.WIDTH - (x + player.getRegionWidth()/2), shootTexture.getRegionHeight());
 			makeLightning();
 			batch.draw(lightning, x + width, y + height/2, 0, 0, 1, 1, Main.WIDTH - x, 3, 0);
 		}
