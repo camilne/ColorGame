@@ -51,7 +51,7 @@ public class Player implements Disposable{
 		y = 300;
 		isDead = false;
 		player = Util.getFromSpriteSheet(0, 0, 50, 50);
-		lightning = Util.getFromSpriteSheet(0, 127, 1, 1);
+		lightning = Util.getFromSpriteSheet(100, 49, 1, 1);
 		death = Gdx.audio.newSound(Gdx.files.internal("res/player_dead_drain.ogg"));
 		shoot = Gdx.audio.newSound(Gdx.files.internal("res/shoot.wav"));
 	}
