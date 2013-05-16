@@ -27,7 +27,7 @@ public class UI implements Disposable{
 		components.add(new Component(300, 100, buttonSize, buttonSize, 62, 169, 31, 31, game));
 		components.add(new Component(Main.WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize, 93, 169, 31, 31, game));
 		components.add(new Component(Main.WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize, 124, 169, 31, 31, game));
-		manager = new FontManager();
+		manager = FontManager.getInstance();
 	}
 	
 	public void render(SpriteBatch batch){
@@ -49,7 +49,13 @@ public class UI implements Disposable{
 		if(game.player.lightDown) components.get(4).selected = true;
 		else components.get(4).selected = false;
 		
+		manager.setColor(0, 0, 0, 1);
 		manager.draw("Score: " + String.valueOf(game.score), 10, Main.HEIGHT - 60, 5, batch);
+		
+		if(game.player.isDead){
+			manager.setColor(1, 0, 0, 1);
+			manager.draw("Game Over", Main.WIDTH/2 - (int)manager.getTextWidth("Game Over", 5)/2, Main.HEIGHT/2 - 25, 5, batch);
+		}
 	}
 	
 	@Override

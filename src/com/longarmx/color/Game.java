@@ -54,6 +54,7 @@ public class Game implements ApplicationListener{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.disableBlending();
+		if(player.isDead) batch.setColor(.9f, .9f, .9f, 1);
 		batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
 		player.render(batch);
 		ui.render(batch);

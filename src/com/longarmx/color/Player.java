@@ -82,7 +82,6 @@ public class Player implements Disposable{
 					green = 0;
 					blue = 0;
 				}
-				
 			}).start();
 		}
 	}
