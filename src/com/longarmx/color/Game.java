@@ -13,6 +13,7 @@ public class Game implements ApplicationListener{
 	
 	SpriteBatch batch;
 	Texture background;
+	Texture overlay;
 	Player player;
 	UI ui;
 	List<Enemy> enemies = new ArrayList<Enemy>();
@@ -25,6 +26,7 @@ public class Game implements ApplicationListener{
 		Gdx.input.setInputProcessor(new Input(this));
 		batch = new SpriteBatch();
 		background = Util.loadTexture("res/background.png");
+		overlay = Util.loadTexture("res/overlay.png");
 		ui = new UI(this);
 		reset();
 		Runtime runtime = Runtime.getRuntime();
@@ -51,12 +53,14 @@ public class Game implements ApplicationListener{
 	public void render() {
 		Gdx.gl.glClearColor(0.95f, 0.95f, 0.95f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
 		batch.begin();
 		batch.disableBlending();
 		if(player.isDead) batch.setColor(.9f, .9f, .9f, 1);
+		else batch.setColor(1, 1, 1, 1);
 		batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
 		player.render(batch);
-		ui.render(batch);
+		
 		for(Enemy enemy : enemies){
 			enemy.render(batch);
 			
@@ -74,6 +78,12 @@ public class Game implements ApplicationListener{
 				enemies.add(new Enemy(this));
 			}
 		}
+		
+		batch.setColor(1, 1, 1, 1);
+		batch.enableBlending();
+		batch.draw(overlay, 0, 0, Main.WIDTH, Main.HEIGHT);
+		
+		ui.render(batch);
 		batch.end();
 	}
 
@@ -89,6 +99,7 @@ public class Game implements ApplicationListener{
 	public void dispose() {
 		batch.dispose();
 		background.dispose();
+		overlay.dispose();
 		ui.dispose();
 		for(Enemy enemy : enemies){
 			enemy.dispose();
