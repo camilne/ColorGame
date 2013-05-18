@@ -24,7 +24,8 @@ public class Game implements ApplicationListener{
 	
 	public States state = States.TITLE;
 	
-	Title title;
+	GuiTitle title;
+	GuiOptions options;
 	
 	@Override
 	public void create() {
@@ -33,7 +34,8 @@ public class Game implements ApplicationListener{
 		background = Util.loadTexture("res/background.png");
 		overlay = Util.loadTexture("res/overlay.png");
 		ui = new UI();
-		title = new Title();
+		title = new GuiTitle();
+		options = new GuiOptions();
 		
 		reset();
 		
@@ -93,6 +95,11 @@ public class Game implements ApplicationListener{
 				ui.render(batch);
 				
 				break;
+			case OPTIONS:
+				options.render(batch);
+				break;
+			default:
+				break;
 			}
 			batch.end();
 	}
@@ -124,6 +131,14 @@ public class Game implements ApplicationListener{
 				}
 			}
 			
+			break;
+		case OPTIONS:
+			
+			options.update();
+			
+			break;
+			
+		default:
 			break;
 		}
 	}

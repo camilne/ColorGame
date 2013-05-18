@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
-public class Title implements Disposable{
+public class GuiTitle implements Disposable{
 	
 	Game game;
 	
@@ -22,7 +22,7 @@ public class Title implements Disposable{
 	
 	Texture background;
 	
-	public Title(){
+	public GuiTitle(){
 		create();
 	}
 	
@@ -47,7 +47,7 @@ public class Title implements Disposable{
 			
 			@Override
 			public void onClick() {
-				
+				game.state = States.OPTIONS;
 			}
 			
 		});

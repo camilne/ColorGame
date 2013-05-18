@@ -9,7 +9,9 @@ public class FontManager{
 	
 	private TextureRegion[] charactersRegion = new TextureRegion[38];
 	private char[] characters = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9',' ',':'};
-	private float spacing = 1.03f;
+	private float spacing = 1.2f;
+	private int charWidth = 7;
+	private int charHeight = 10;
 	private float r = 0;
 	private float g = 0;
 	private float b = 0;
@@ -38,7 +40,7 @@ public class FontManager{
 		char[] chars = string.toCharArray();
 		int x1 = 0;
 		for(int i = 0; i < chars.length; i++){
-			batch.draw(charactersRegion[getCharI(chars[i])], x + x1 * 7 * scale * spacing, y, scale * 7, scale * 10);
+			batch.draw(charactersRegion[getCharI(chars[i])], x + x1 * charWidth * scale * spacing, y, scale * charWidth, scale * charHeight);
 			x1++;
 		}
 	}
@@ -60,15 +62,15 @@ public class FontManager{
 	}
 	
 	public float getTextWidth(String string, float scale){
-		return string.length() * scale * spacing * 7;
+		return string.length() * scale * spacing * charWidth;
 	}
 	
 	public float getTextHeight(float scale){
-		return scale * 10;
+		return scale * charHeight;
 	}
 	
 	private TextureRegion getRegion(int x, int y){
-		return Util.getFromSpriteSheet(x * 7 + 100, y * 10, 7, 10);
+		return Util.getFromSpriteSheet(x * charWidth + 100, y * charHeight, charWidth, charHeight);
 	}
 	
 	public static FontManager getInstance(){

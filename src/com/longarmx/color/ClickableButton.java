@@ -1,8 +1,11 @@
 package com.longarmx.color;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Disposable;
 
-public class ClickableButton extends Component{
+public class ClickableButton extends Component implements Disposable{
 	
 	private static int srcX = 50;
 	private static int srcY = 50;
@@ -13,6 +16,7 @@ public class ClickableButton extends Component{
 	private int scale = 1;
 	private FontManager manager;
 	private ClickManager clickManager;
+	private Sound click;
 	
 	private float r = .9f;
 	private float g = .9f;
@@ -32,6 +36,7 @@ public class ClickableButton extends Component{
 	
 	private void create(){
 		manager = new FontManager();
+		click = Gdx.audio.newSound(Gdx.files.internal("res/click.wav"));
 	}
 	
 	public void setText(String text, int scale){
@@ -59,12 +64,22 @@ public class ClickableButton extends Component{
 	public void update(){
 		if(Input.mouseX > x && Input.mouseX < x+width && Input.mouseY > y && Input.mouseY < y+height){
 			selected = true;
-			if(Input.mouseDown){
-				clickManager.onClick();
+			if(Gdx.input.justTouched()){
+				click();
 			}
 		}else{
 			selected = false;
 		}
 	}
-
+	
+	private void click(){
+		clickManager.onClick();
+		click.play(.5f);
+	}
+	
+	@Override
+	public void dispose(){
+		click.dispose();
+	}
+	
 }
