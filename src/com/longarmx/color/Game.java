@@ -21,7 +21,11 @@ public class Game implements ApplicationListener{
 	public static int level = 1;
 	
 	boolean paused = false;
-
+	
+	public States state = States.TITLE;
+	
+	Title title;
+	
 	@Override
 	public void create() {
 		Gdx.input.setInputProcessor(new Input());
@@ -29,7 +33,10 @@ public class Game implements ApplicationListener{
 		background = Util.loadTexture("res/background.png");
 		overlay = Util.loadTexture("res/overlay.png");
 		ui = new UI();
+		title = new Title();
+		
 		reset();
+		
 		Runtime runtime = Runtime.getRuntime();
 		System.out.println("Total RAM used: " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024*1024)) + "MB");
 	}
@@ -59,41 +66,66 @@ public class Game implements ApplicationListener{
 			Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 			
 			batch.begin();
-			batch.disableBlending();
-			if(player.isDead) batch.setColor(.9f, .9f, .9f, 1);
-			else batch.setColor(1, 1, 1, 1);
-			batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
-			player.render(batch);
-			
-			for(Enemy enemy : enemies){
-				enemy.render(batch);
+			switch(state){
+			case TITLE:
+				
+				batch.disableBlending();
+				title.render(batch);
+				
+				break;
+				
+			case GAME:
+				
+				batch.disableBlending();
+				if(player.isDead) batch.setColor(.9f, .9f, .9f, 1);
+				else batch.setColor(1, 1, 1, 1);
+				batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
+				player.render(batch);
+				
+				for(Enemy enemy : enemies){
+					enemy.render(batch);
+				}
+				
+				batch.setColor(1, 1, 1, 1);
+				batch.enableBlending();
+				batch.draw(overlay, 0, 0, Main.WIDTH, Main.HEIGHT);
+				
+				ui.render(batch);
+				
+				break;
 			}
-			
-			batch.setColor(1, 1, 1, 1);
-			batch.enableBlending();
-			batch.draw(overlay, 0, 0, Main.WIDTH, Main.HEIGHT);
-			
-			ui.render(batch);
 			batch.end();
 	}
 	
 	private void update(){
-		for(int i = 0; i < enemies.size(); i++){
-			if(enemies.get(i).isDead){
-				score++;
-				enemies.remove(i);
-				Enemy.SPEED += .2f;
-				if(Enemy.SPEED < 2){
-					level = 1;
-				}else if(Enemy.SPEED < 3){
-					level = 2;
-				}
-				enemies.add(new Enemy());
-			}else{
-				enemies.get(i).update();
-			}
-		}
+		switch(state){
 		
+		case TITLE:
+			
+			title.update();
+			
+			break;
+			
+		case GAME:
+			
+			for(int i = 0; i < enemies.size(); i++){
+				if(enemies.get(i).isDead){
+					score++;
+					enemies.remove(i);
+					Enemy.SPEED += .2f;
+					if(Enemy.SPEED < 2){
+						level = 1;
+					}else if(Enemy.SPEED < 3){
+						level = 2;
+					}
+					enemies.add(new Enemy());
+				}else{
+					enemies.get(i).update();
+				}
+			}
+			
+			break;
+		}
 	}
 
 	@Override
@@ -112,5 +144,6 @@ public class Game implements ApplicationListener{
 		ui.dispose();
 		player.dispose();
 		Util.dispose();
+		title.dispose();
 	}
 }

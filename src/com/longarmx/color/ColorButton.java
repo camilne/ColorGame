@@ -3,7 +3,7 @@ package com.longarmx.color;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Button extends Component {
+public class ColorButton extends Component {
 	
 	private static int srcX = 0;
 	private static int srcY = 50;
@@ -12,12 +12,12 @@ public class Button extends Component {
 	
 	private Color color = new Color(1, 1, 1, 1);
 	
-	public Button(int x, int y, Game game) {
-		super(x, y, srcX, srcY, srcWidth, srcHeight, game);
+	public ColorButton(int x, int y) {
+		super(x, y, srcX, srcY, srcWidth, srcHeight);
 	}
 
-	public Button(int x, int y, int width, int height,Game game) {
-		super(x, y, width, height, srcX, srcY, srcWidth, srcHeight, game);
+	public ColorButton(int x, int y, int width, int height) {
+		super(x, y, width, height, srcX, srcY, srcWidth, srcHeight);
 	}
 
 	public void render(SpriteBatch batch){

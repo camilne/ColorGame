@@ -63,6 +63,10 @@ public class FontManager{
 		return string.length() * scale * spacing * 7;
 	}
 	
+	public float getTextHeight(float scale){
+		return scale * 10;
+	}
+	
 	private TextureRegion getRegion(int x, int y){
 		return Util.getFromSpriteSheet(x * 7 + 100, y * 10, 7, 10);
 	}

@@ -6,6 +6,11 @@ public class Input implements InputProcessor{
 	
 	Game game;
 	
+	public static int mouseX = 0;
+	public static int mouseY = 0;
+	
+	public static boolean mouseDown = false;
+	
 	public Input(){
 		this.game = Main.instance;
 	}
@@ -88,11 +93,13 @@ public class Input implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		mouseDown = true;
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		mouseDown = false;
 		return false;
 	}
 
@@ -103,6 +110,8 @@ public class Input implements InputProcessor{
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
+		mouseX = screenX;
+		mouseY = Main.HEIGHT - screenY;
 		return false;
 	}
 

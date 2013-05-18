@@ -16,11 +16,11 @@ public class UI implements Disposable{
 	
 	private Game game;
 	
-	private Button red;
-	private Button green;
-	private Button blue;
-	private Button dark;
-	private Button light;
+	private ColorButton red;
+	private ColorButton green;
+	private ColorButton blue;
+	private ColorButton dark;
+	private ColorButton light;
 	
 	public UI(){
 		this.game = Main.instance;
@@ -28,23 +28,23 @@ public class UI implements Disposable{
 	}
 	
 	public void create(){
-		red = new Button(100, 100, buttonSize, buttonSize, game);
+		red = new ColorButton(100, 100, buttonSize, buttonSize);
 		red.setColor(1, 0, 0, 1);
 		components.add(red);
 		
-		green = new Button(200, 100, buttonSize, buttonSize, game);
+		green = new ColorButton(200, 100, buttonSize, buttonSize);
 		green.setColor(0, 1, 0, 1);
 		components.add(green);
 		
-		blue = new Button(300, 100, buttonSize, buttonSize, game);
+		blue = new ColorButton(300, 100, buttonSize, buttonSize);
 		blue.setColor(0, 0, 1, 1);
 		components.add(blue);
 		
-		dark = new Button(Main.WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize, game);
+		dark = new ColorButton(Main.WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize);
 		dark.setColor(.3f, .3f, .3f, 1);
 		components.add(dark);
 		
-		light = new Button(Main.WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize, game);
+		light = new ColorButton(Main.WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize);
 		light.setColor(.8f, .8f, .8f, 1);
 		components.add(light);
 		

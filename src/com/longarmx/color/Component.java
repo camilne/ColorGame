@@ -16,15 +16,15 @@ public class Component {
 	
 	public Game game;
 	
-	public Component(int x, int y, int srcX, int srcY, int srcWidth, int srcHeight, Game game){
-		this.game = game;
+	public Component(int x, int y, int srcX, int srcY, int srcWidth, int srcHeight){
+		this.game = Main.instance;
 		this.x = x;
 		this.y = y;
 		create(srcX, srcY, srcWidth, srcHeight);
 	}
 	
-	public Component(int x, int y, int width, int height, int srcX, int srcY, int srcWidth, int srcHeight, Game game){
-		this(x, y, srcX, srcY, srcWidth, srcHeight, game);
+	public Component(int x, int y, int width, int height, int srcX, int srcY, int srcWidth, int srcHeight){
+		this(x, y, srcX, srcY, srcWidth, srcHeight);
 		this.width = width;
 		this.height = height;
 	}
@@ -39,6 +39,10 @@ public class Component {
 	public void render(SpriteBatch batch){
 		batch.enableBlending();
 		batch.draw(texture, x, y, width, height);
+	}
+	
+	public void update(){
+		
 	}
 
 }
