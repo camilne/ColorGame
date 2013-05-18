@@ -1,5 +1,9 @@
 package com.longarmx.color;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -13,7 +17,11 @@ public class Main {
 		config.width = WIDTH;
 		config.height = HEIGHT;
 		config.useGL20 = true;
-		config.title = "Color Game - V:0.0.3";
+		try {
+			config.title = "Color Game - V: " + new Scanner(new File("VERSION.txt")).nextLine();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		new LwjglApplication(new Game(), config);
 	}
 
