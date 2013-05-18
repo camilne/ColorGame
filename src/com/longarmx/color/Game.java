@@ -24,11 +24,11 @@ public class Game implements ApplicationListener{
 
 	@Override
 	public void create() {
-		Gdx.input.setInputProcessor(new Input(this));
+		Gdx.input.setInputProcessor(new Input());
 		batch = new SpriteBatch();
 		background = Util.loadTexture("res/background.png");
 		overlay = Util.loadTexture("res/overlay.png");
-		ui = new UI(this);
+		ui = new UI();
 		reset();
 		Runtime runtime = Runtime.getRuntime();
 		System.out.println("Total RAM used: " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024*1024)) + "MB");
@@ -38,8 +38,8 @@ public class Game implements ApplicationListener{
 		for(int i = 0; i < enemies.size(); i++){
 			enemies.remove(i);
 		}
-		enemies.add(new Enemy(this));
-		player = new Player(this);
+		enemies.add(new Enemy());
+		player = new Player();
 		Enemy.SPEED = 1.0f;
 		level = 1;
 		score = 0;
@@ -88,7 +88,7 @@ public class Game implements ApplicationListener{
 				}else if(Enemy.SPEED < 3){
 					level = 2;
 				}
-				enemies.add(new Enemy(this));
+				enemies.add(new Enemy());
 			}else{
 				enemies.get(i).update();
 			}

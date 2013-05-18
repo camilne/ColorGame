@@ -19,14 +19,25 @@ public class Enemy {
 	
 	private TextureRegion texture;
 	
-	public Enemy(Game game){
-		this.game = game;
+	private boolean staticColor = false;
+	
+	public Enemy(){
+		this.game = Main.instance;
+		create();
+	}
+	
+	public Enemy(float r, float g, float b){
+		this.game = Main.instance;
+		this.red = r;
+		this.green = g;
+		this.blue = b;
+		staticColor = true;
 		create();
 	}
 	
 	public void create(){
-		random = new Random();
-		switchColor();
+		if(!staticColor) random = new Random();
+		if(!staticColor) switchColor();
 		texture = Util.getFromSpriteSheet(50, 0, 50, 50);
 	}
 	

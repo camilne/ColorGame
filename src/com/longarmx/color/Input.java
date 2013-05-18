@@ -6,8 +6,8 @@ public class Input implements InputProcessor{
 	
 	Game game;
 	
-	public Input(Game game){
-		this.game = game;
+	public Input(){
+		this.game = Main.instance;
 	}
 
 	@Override

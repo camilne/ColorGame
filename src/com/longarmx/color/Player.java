@@ -41,8 +41,8 @@ public class Player implements Disposable{
 	private Sound death;
 	private Sound shoot;
 	
-	public Player(Game game){
-		this.game = game;
+	public Player(){
+		this.game = Main.instance;
 		create();
 	}
 	

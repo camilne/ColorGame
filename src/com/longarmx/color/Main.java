@@ -11,6 +11,7 @@ public class Main {
 	
 	public static final int WIDTH = 1080;
 	public static final int HEIGHT = 768;
+	public static Game instance;
 
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -22,7 +23,8 @@ public class Main {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		new LwjglApplication(new Game(), config);
+		instance = new Game();
+		new LwjglApplication(instance, config);
 	}
 
 }

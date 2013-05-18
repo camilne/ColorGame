@@ -22,8 +22,8 @@ public class UI implements Disposable{
 	private Button dark;
 	private Button light;
 	
-	public UI(Game game){
-		this.game = game;
+	public UI(){
+		this.game = Main.instance;
 		create();
 	}
 	
