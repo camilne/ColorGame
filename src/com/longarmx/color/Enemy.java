@@ -31,7 +31,6 @@ public class Enemy {
 	}
 	
 	public void render(SpriteBatch batch){
-		update();
 		batch.enableBlending();
 		batch.setColor(red, green, blue, 1);
 		batch.draw(texture, x, 300);
@@ -50,10 +49,6 @@ public class Enemy {
 				isDead = true;
 			}
 		}
-	}
-	
-	public void dispose(){
-		
 	}
 	
 	public void switchColor(){

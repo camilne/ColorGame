@@ -18,8 +18,9 @@ public class Game implements ApplicationListener{
 	UI ui;
 	List<Enemy> enemies = new ArrayList<Enemy>();
 	int score = 0;
-	
 	public static int level = 1;
+	
+	boolean paused = false;
 
 	@Override
 	public void create() {
@@ -42,6 +43,7 @@ public class Game implements ApplicationListener{
 		Enemy.SPEED = 1.0f;
 		level = 1;
 		score = 0;
+		paused = false;
 	}
 
 	@Override
@@ -51,20 +53,31 @@ public class Game implements ApplicationListener{
 
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor(0.95f, 0.95f, 0.95f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		batch.begin();
-		batch.disableBlending();
-		if(player.isDead) batch.setColor(.9f, .9f, .9f, 1);
-		else batch.setColor(1, 1, 1, 1);
-		batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
-		player.render(batch);
-		
-		for(Enemy enemy : enemies){
-			enemy.render(batch);
+			if(!paused) update();
 			
-		}
+			Gdx.gl.glClearColor(0.95f, 0.95f, 0.95f, 1);
+			Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+			
+			batch.begin();
+			batch.disableBlending();
+			if(player.isDead) batch.setColor(.9f, .9f, .9f, 1);
+			else batch.setColor(1, 1, 1, 1);
+			batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
+			player.render(batch);
+			
+			for(Enemy enemy : enemies){
+				enemy.render(batch);
+			}
+			
+			batch.setColor(1, 1, 1, 1);
+			batch.enableBlending();
+			batch.draw(overlay, 0, 0, Main.WIDTH, Main.HEIGHT);
+			
+			ui.render(batch);
+			batch.end();
+	}
+	
+	private void update(){
 		for(int i = 0; i < enemies.size(); i++){
 			if(enemies.get(i).isDead){
 				score++;
@@ -76,15 +89,11 @@ public class Game implements ApplicationListener{
 					level = 2;
 				}
 				enemies.add(new Enemy(this));
+			}else{
+				enemies.get(i).update();
 			}
 		}
 		
-		batch.setColor(1, 1, 1, 1);
-		batch.enableBlending();
-		batch.draw(overlay, 0, 0, Main.WIDTH, Main.HEIGHT);
-		
-		ui.render(batch);
-		batch.end();
 	}
 
 	@Override
@@ -101,9 +110,6 @@ public class Game implements ApplicationListener{
 		background.dispose();
 		overlay.dispose();
 		ui.dispose();
-		for(Enemy enemy : enemies){
-			enemy.dispose();
-		}
 		player.dispose();
 		Util.dispose();
 	}

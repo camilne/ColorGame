@@ -12,5 +12,9 @@ public class Config {
 	public static final int PLAYER_LIGHT = Keys.K;
 	
 	public static final int PLAYER_SHOOT = Keys.SPACE;
+	public static final int PLAYER_RESET = Keys.R;
+	
+	public static final int GAME_RESET = Keys.P;
+	public static final int GAME_PAUSE = Keys.T;
 	
 }

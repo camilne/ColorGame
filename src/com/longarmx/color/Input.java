@@ -1,6 +1,5 @@
 package com.longarmx.color;
 
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 public class Input implements InputProcessor{
@@ -13,7 +12,7 @@ public class Input implements InputProcessor{
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if(!game.player.isDead){
+		if(!game.player.isDead && !game.paused){
 			switch(keycode){
 			case Config.PLAYER_RED:
 					game.player.redDown = true;
@@ -33,18 +32,25 @@ public class Input implements InputProcessor{
 			case Config.PLAYER_SHOOT:
 					game.player.shoot();
 				break;
+			case Config.PLAYER_RESET:
+					game.player.red = 0;
+					game.player.green = 0;
+					game.player.blue = 0;
+					game.player.setColor = false;
+				break;
 			default:
 				break;
 			}
 		}
-		if(keycode == Keys.P){
+		if(keycode == Config.GAME_RESET){
 			game.reset();
 		}
-		if(keycode == Keys.R){
-			game.player.red = 0;
-			game.player.green = 0;
-			game.player.blue = 0;
-			game.player.setColor = false;
+		if(keycode == Config.GAME_PAUSE){
+			if(game.paused){
+				game.paused = false;
+			}else{
+				game.paused = true;
+			}
 		}
 		return false;
 	}

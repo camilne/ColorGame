@@ -52,9 +52,25 @@ public class UI implements Disposable{
 	}
 	
 	public void render(SpriteBatch batch){
+		update();
+		
 		for(Component component: components){
 			component.render(batch);
 		}
+		
+		manager.setColor(0, 0, 0, 1);
+		manager.draw("Score: " + String.valueOf(game.score), 10, Main.HEIGHT - 60, 5, batch);
+		
+		if(game.player.isDead){
+			manager.setColor(1, 0, 0, 1);
+			manager.draw("Game Over", Main.WIDTH/2 - (int)manager.getTextWidth("Game Over", 5)/2, Main.HEIGHT/2 - 25, 5, batch);
+		}else if(game.paused){
+			manager.setColor(0, 1, 0, 1);
+			manager.draw("Paused", Main.WIDTH/2 - (int)manager.getTextWidth("Paused", 5)/2, Main.HEIGHT/2 - 25, 5, batch);
+		}
+	}
+	
+	public void update(){
 		if(game.player.redDown) red.selected = true;
 		else red.selected = false;
 		
@@ -69,14 +85,6 @@ public class UI implements Disposable{
 		
 		if(game.player.lightDown) light.selected = true;
 		else light.selected = false;
-		
-		manager.setColor(0, 0, 0, 1);
-		manager.draw("Score: " + String.valueOf(game.score), 10, Main.HEIGHT - 60, 5, batch);
-		
-		if(game.player.isDead){
-			manager.setColor(1, 0, 0, 1);
-			manager.draw("Game Over", Main.WIDTH/2 - (int)manager.getTextWidth("Game Over", 5)/2, Main.HEIGHT/2 - 25, 5, batch);
-		}
 	}
 	
 	@Override

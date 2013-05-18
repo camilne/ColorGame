@@ -13,7 +13,7 @@ public class Main {
 		config.width = WIDTH;
 		config.height = HEIGHT;
 		config.useGL20 = true;
-		config.title = "Color Game - V:0.0.2";
+		config.title = "Color Game - V:0.0.3";
 		new LwjglApplication(new Game(), config);
 	}
 
