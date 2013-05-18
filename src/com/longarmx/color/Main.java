@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -18,6 +19,9 @@ public class Main {
 		config.width = WIDTH;
 		config.height = HEIGHT;
 		config.useGL20 = true;
+		config.addIcon("res/icon128.png", FileType.Internal);
+		config.addIcon("res/icon32.png", FileType.Internal);
+		config.addIcon("res/icon16.png", FileType.Internal);
 		try {
 			config.title = "Color Game - V: " + new Scanner(new File("VERSION.txt")).nextLine();
 		} catch (FileNotFoundException e) {
