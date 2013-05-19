@@ -23,7 +23,7 @@ public class Main {
 		config.addIcon("res/icon32.png", FileType.Internal);
 		config.addIcon("res/icon16.png", FileType.Internal);
 		try {
-			config.title = "Color Game - V: " + new Scanner(new File("VERSION.txt")).nextLine();
+			config.title = "Color Game - V: " + new Scanner(new File("res/VERSION.txt")).nextLine();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
