@@ -32,7 +32,7 @@ public class Game implements ApplicationListener{
 	Texture background;
 	Texture overlay;
 	Player player;
-	UI ui;
+	GuiGame ui;
 	List<Enemy> enemies = new ArrayList<Enemy>();
 	int score = 0;
 	public static int level = 1;
@@ -51,7 +51,7 @@ public class Game implements ApplicationListener{
 		batch = new SpriteBatch();
 		background = Util.loadTexture("res/background.png");
 		overlay = Util.loadTexture("res/overlay.png");
-		ui = new UI();
+		ui = new GuiGame();
 		title = new GuiTitle();
 		options = new GuiOptions();
 		

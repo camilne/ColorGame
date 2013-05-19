@@ -20,11 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
-public class GuiTitle implements Disposable{
+public class GuiTitle extends Gui implements Disposable{
 	
 	Game game;
 	
@@ -36,15 +35,14 @@ public class GuiTitle implements Disposable{
 	
 	private FontManager manager;
 	
-	Texture background;
-	
 	public GuiTitle(){
 		create();
 	}
 	
 	public void create(){
+		super.create();
 		this.game = Main.instance;
-		background = new Texture(Gdx.files.internal("res/titleBackground.png"));
+		
 		manager = new FontManager();
 		
 		start = new ClickableButton(Main.WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
@@ -86,16 +84,19 @@ public class GuiTitle implements Disposable{
 	}
 	
 	public void render(SpriteBatch batch){
+		super.render(batch);
+		
 		batch.setColor(1, 1, 1, 1);
-		batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
 		for(ClickableButton component: components){
 			component.render(batch);
 		}
+		
 		manager.draw("Color Game", Main.WIDTH/2 - (int)manager.getTextWidth("Color Game", 7)/2, 600, 7, batch);
 		manager.draw("A game by Longarmx", Main.WIDTH/2 - (int)manager.getTextWidth("A game by Longarmx", 2)/2, 550, 2, batch);
 	}
 	
 	public void update(){
+		super.update();
 		for(ClickableButton component: components){
 			component.update();
 		}
@@ -103,7 +104,7 @@ public class GuiTitle implements Disposable{
 	
 	@Override
 	public void dispose(){
-		background.dispose();
+		super.dispose();
 	}
 
 }

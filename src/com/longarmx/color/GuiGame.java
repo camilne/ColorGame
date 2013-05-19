@@ -22,7 +22,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
-public class UI implements Disposable{
+public class GuiGame extends Gui implements Disposable{
 	
 	public List<Component> components = new ArrayList<Component>();
 	
@@ -38,7 +38,7 @@ public class UI implements Disposable{
 	private ColorButton dark;
 	private ColorButton light;
 	
-	public UI(){
+	public GuiGame(){
 		this.game = Main.instance;
 		create();
 	}

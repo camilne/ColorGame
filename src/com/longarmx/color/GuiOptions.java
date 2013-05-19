@@ -19,12 +19,10 @@ package com.longarmx.color;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
-public class GuiOptions implements Disposable{
+public class GuiOptions extends Gui implements Disposable{
 	
 	Game game;
 	
@@ -36,15 +34,14 @@ public class GuiOptions implements Disposable{
 	
 	private FontManager manager;
 	
-	Texture background;
-	
 	public GuiOptions(){
 		create();
 	}
 	
 	public void create(){
 		this.game = Main.instance;
-		background = new Texture(Gdx.files.internal("res/titleBackground.png"));
+		super.create();
+		
 		manager = new FontManager();
 		
 		volume = new Slider(Main.WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
@@ -72,8 +69,9 @@ public class GuiOptions implements Disposable{
 	}
 	
 	public void render(SpriteBatch batch){
+		super.render(batch);
+		
 		batch.setColor(1, 1, 1, 1);
-		batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
 		for(ClickableButton component: clickableButtons){
 			component.render(batch);
 		}
@@ -87,6 +85,7 @@ public class GuiOptions implements Disposable{
 	}
 	
 	public void update(){
+		super.update();
 		for(ClickableButton clickableButton: clickableButtons){
 			clickableButton.update();
 		}
@@ -99,7 +98,7 @@ public class GuiOptions implements Disposable{
 
 	@Override
 	public void dispose() {
-		background.dispose();
+		super.dispose();
 	}
 
 }
