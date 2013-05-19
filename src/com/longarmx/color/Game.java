@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -131,6 +132,8 @@ public class Game implements ApplicationListener{
 					enemies.get(i).update();
 				}
 			}
+			
+			if(Gdx.input.isKeyPressed(Keys.ESCAPE)) state = States.TITLE;
 			
 			break;
 		case OPTIONS:

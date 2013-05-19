@@ -36,6 +36,7 @@ public class GuiTitle implements Disposable{
 			@Override
 			public void onClick() {
 				game.state = States.GAME;
+				game.reset();
 			}
 			
 		});
