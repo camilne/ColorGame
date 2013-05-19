@@ -81,7 +81,7 @@ public class Player implements Disposable{
 				@Override
 				public void run() {
 					isShooting = true;
-					shoot.play();
+					shoot.play(game.volume);
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
@@ -120,17 +120,16 @@ public class Player implements Disposable{
 		}
 	}
 	
+	public void die(){
+		if(!isDead){
+			death.play(game.volume);
+			isDead = true;
+		}
+	}
+	
 	@Override
 	public void dispose(){
 		death.dispose();
 		shoot.dispose();
 	}
-	
-	public void die(){
-		if(!isDead){
-			death.play();
-			isDead = true;
-		}
-	}
-
 }

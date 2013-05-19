@@ -12,10 +12,10 @@ public class GuiOptions implements Disposable{
 	
 	Game game;
 	
-	List<ClickableButton> components = new ArrayList<ClickableButton>();
+	List<ClickableButton> clickableButtons = new ArrayList<ClickableButton>();
+	List<Slider> sliders = new ArrayList<Slider>();
 	
-	//private ClickableButton start;
-	//private ClickableButton options;
+	private Slider volume;
 	private ClickableButton back;
 	
 	private FontManager manager;
@@ -31,29 +31,15 @@ public class GuiOptions implements Disposable{
 		background = new Texture(Gdx.files.internal("res/titleBackground.png"));
 		manager = new FontManager();
 		
-		/*start = new ClickableButton(Main.WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
+		volume = new Slider(Main.WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
 
-			@Override
-			public void onClick() {
-				game.state = States.GAME;
-			}
-			
-		});
-		components.add(start);
-		start.setText("Start Game", 4);
-		start.setHighlightColor(1, 0, 0);
-		
-		options = new ClickableButton(Main.WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
-			
 			@Override
 			public void onClick() {
 				
 			}
 			
 		});
-		components.add(options);
-		options.setText("Options", 4);
-		options.setHighlightColor(0, 1, 0);*/
+		sliders.add(volume);
 		
 		back = new ClickableButton(Main.WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
 			
@@ -63,7 +49,7 @@ public class GuiOptions implements Disposable{
 			}
 			
 		});
-		components.add(back);
+		clickableButtons.add(back);
 		back.setText("Back", 4);
 		back.setHighlightColor(1, 0, 1);
 	}
@@ -71,21 +57,32 @@ public class GuiOptions implements Disposable{
 	public void render(SpriteBatch batch){
 		batch.setColor(1, 1, 1, 1);
 		batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
-		for(ClickableButton component: components){
+		for(ClickableButton component: clickableButtons){
 			component.render(batch);
 		}
+		
+		for(Slider slider: sliders){
+			slider.render(batch);
+		}
+		
 		manager.draw("Options", Main.WIDTH/2 - (int)manager.getTextWidth("Options", 7)/2, 600, 7, batch);
+		manager.draw("Volume: ", volume.x - (int)manager.getTextWidth("Volume: ", 3), 500 + volume.height/2 - (int)manager.getTextHeight(3)/2, 3, batch);
 	}
 	
 	public void update(){
-		for(ClickableButton component: components){
-			component.update();
+		for(ClickableButton clickableButton: clickableButtons){
+			clickableButton.update();
 		}
+		
+		for(Slider slider: sliders){
+			slider.update();
+		}
+		game.volume = volume.getValue();
 	}
 
 	@Override
 	public void dispose() {
-		
+		background.dispose();
 	}
 
 }

@@ -117,6 +117,8 @@ public class Input implements InputProcessor{
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		mouseX = screenX;
+		mouseY = Main.HEIGHT - screenY;
 		return false;
 	}
 

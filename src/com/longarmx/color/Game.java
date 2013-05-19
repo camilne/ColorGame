@@ -19,6 +19,7 @@ public class Game implements ApplicationListener{
 	List<Enemy> enemies = new ArrayList<Enemy>();
 	int score = 0;
 	public static int level = 1;
+	public float volume = 1.0f;
 	
 	boolean paused = false;
 	
@@ -145,10 +146,12 @@ public class Game implements ApplicationListener{
 
 	@Override
 	public void pause() {
+		
 	}
 
 	@Override
 	public void resume() {
+		
 	}
 
 	@Override

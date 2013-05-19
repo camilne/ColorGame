@@ -62,6 +62,7 @@ public class ClickableButton extends Component implements Disposable{
 
 	@Override
 	public void update(){
+		super.update();
 		if(Input.mouseX > x && Input.mouseX < x+width && Input.mouseY > y && Input.mouseY < y+height){
 			selected = true;
 			if(Gdx.input.justTouched()){
@@ -74,7 +75,7 @@ public class ClickableButton extends Component implements Disposable{
 	
 	private void click(){
 		clickManager.onClick();
-		click.play(.5f);
+		click.play(game.volume);
 	}
 	
 	@Override
