@@ -40,6 +40,7 @@ public class GuiOptions implements Disposable{
 			
 		});
 		sliders.add(volume);
+		volume.setHighlightColor(0, 1, 1);
 		
 		back = new ClickableButton(Main.WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
 			

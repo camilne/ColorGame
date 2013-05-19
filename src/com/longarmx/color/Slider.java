@@ -16,6 +16,10 @@ public class Slider extends Component{
 	
 	private float value = 1.0f;
 	
+	private float r = 1;
+	private float g = 1;
+	private float b = 1;
+	
 	private TextureRegion slider;
 	
 	private ClickManager clickManager;
@@ -40,18 +44,30 @@ public class Slider extends Component{
 	public void render(SpriteBatch batch){
 		batch.setColor(1, 1, 1, 1);
 		super.render(batch);
+		if(selected) batch.setColor(r, g, b, 1);
 		batch.draw(slider, sliderX, y, sliderWidth, height);
 	}
 	
 	public void update(){
 		super.update();
-		if(Input.mouseDown){
-			if(Input.mouseX > x && Input.mouseX < x+width && Input.mouseY > y && Input.mouseY < y+height){
-				sliderX = Input.mouseX - sliderWidth/2;
-				value = (sliderX + sliderWidth/2 - x)/width;
-				clickManager.onClick();
+			if(Input.mouseX > x && Input.mouseX < x + width && Input.mouseY > y && Input.mouseY < y + height){
+				if(Input.mouseDown){
+					sliderX = Input.mouseX - sliderWidth/2;
+					value = (sliderX + sliderWidth/2 - x)/width;
+					clickManager.onClick();
+				}
 			}
-		}
+			if(Input.mouseX > sliderX && Input.mouseX < sliderX + sliderWidth && Input.mouseY > y && Input.mouseY < y + height){
+				selected = true;
+			}else{
+				selected = false;
+			}
+	}
+	
+	public void setHighlightColor(float r, float g, float b){
+		this.r = r;
+		this.g = g;
+		this.b = b;
 	}
 	
 	public float getValue(){
