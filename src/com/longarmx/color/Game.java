@@ -134,7 +134,7 @@ public class Game implements ApplicationListener{
 		case GAME:
 			
 			for(int i = 0; i < enemies.size(); i++){
-				if(enemies.get(i).isDead){
+				if(enemies.get(i).forDestruction){
 					score++;
 					enemies.remove(i);
 					Enemy.SPEED += .2f;

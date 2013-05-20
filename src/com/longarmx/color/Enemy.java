@@ -30,10 +30,15 @@ public class Enemy {
 	private Random random;
 	private Game game;
 	public boolean isDead = false;
+	public volatile boolean forDestruction = false;
 	
 	public static float SPEED = 1.0f;
 	
-	private TextureRegion texture;
+	private TextureRegion textureTop;
+	private TextureRegion textureBottom;
+	private volatile float yTop = 325;
+	private volatile float yBottom = 300;
+	private volatile float rotation = 0;
 	
 	private boolean staticColor = false;
 	
@@ -54,13 +59,15 @@ public class Enemy {
 	public void create(){
 		if(!staticColor) random = new Random();
 		if(!staticColor) switchColor();
-		texture = Util.getFromSpriteSheet(50, 0, 50, 50);
+		textureTop = Util.getFromSpriteSheet(50, 0, 50, 25);
+		textureBottom = Util.getFromSpriteSheet(50, 25, 50, 25);
 	}
 	
 	public void render(SpriteBatch batch){
 		batch.enableBlending();
 		batch.setColor(red, green, blue, 1);
-		batch.draw(texture, x, 300);
+		batch.draw(textureTop, x, yTop, 0, 0, 50, 25, 1, 1, -rotation);
+		batch.draw(textureBottom, x, yBottom, 0, 0, 50, 25, 1, 1, rotation);
 		batch.setColor(1, 1, 1, 1);
 	}
 	
@@ -73,7 +80,7 @@ public class Enemy {
 		}
 		if(game.player.isShooting){
 			if(game.player.red == red && game.player.green == green && game.player.blue == blue){
-				isDead = true;
+				die();
 			}
 		}
 	}
@@ -89,6 +96,28 @@ public class Enemy {
 			green = Util.boolToFloat(random.nextBoolean());
 			blue = Util.boolToFloat(random.nextBoolean());
 		}
+	}
+	
+	public void die(){
+		isDead = true;
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				for(int i = 0; i < 10; i++){
+					yTop++;
+					yBottom--;
+					rotation += 1;
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				forDestruction = true;
+			}
+			
+		}).start();
 	}
 
 }
