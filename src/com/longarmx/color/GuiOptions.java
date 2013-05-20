@@ -60,6 +60,7 @@ public class GuiOptions extends Gui implements Disposable{
 			@Override
 			public void onClick() {
 				game.state = States.TITLE;
+				game.title.setColor(r, g, b);
 			}
 			
 		});

@@ -9,25 +9,42 @@ public class Gui implements Disposable{
 	
 	private Texture background;
 	
-	protected float shade = 1.0f;
+	protected float r = 1.0f;
+	protected float g = 1.0f;
+	protected float b = 1.0f;
 	
 	protected void create(){
 		background = new Texture(Gdx.files.internal("res/titleBackground.png"));
 	}
 	
 	protected void render(SpriteBatch batch){
-		batch.setColor(shade, shade, shade, 1);
+		batch.setColor(r, g, b, 1);
 		batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
 	}
 	
 	protected void update(){
-		shade = (float)Input.mouseY/Main.HEIGHT + .1f;
-		if(shade > 1)	shade = 1.0f;
+		
+		r = (float)Input.mouseX/Main.WIDTH;
+		if(r > .9f)	r = 0.9f;
+		if(r < .1f)	r = 0.1f;
+		
+		g = (float)(Main.HEIGHT - Input.mouseY)/Main.HEIGHT;
+		if(g > .9f)	g = 0.9f;
+		if(g < .1f)	g = 0.1f;
+		
+		b = (float)(Main.WIDTH - Input.mouseX)/Main.HEIGHT;
+		if(b > .9f)	b = 0.9f;
+		if(b < .1f)	b = 0.1f;
 	}
 
 	@Override
 	public void dispose() {
 		background.dispose();
 	}
-
+	
+	public void setColor(float r, float g, float b){
+		this.r = r;
+		this.g = g;
+		this.b = b;
+	}
 }
