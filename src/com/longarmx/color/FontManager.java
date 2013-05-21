@@ -70,7 +70,7 @@ public class FontManager{
 		return 36;
 	}
 	
-	public void setColor(int r, int g, int b, int a){
+	public void setColor(float r, float g, float b, float a){
 		if(this.r != r)	this.r = r;
 		if(this.g != g)	this.g = g;
 		if(this.b != b)	this.b = b;

@@ -23,9 +23,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Enemy {
 	
-	private float red;
-	private float green;
-	private float blue;
+	private float red = 1.0f;
+	private float green = 1.0f;
+	private float blue = 1.0f;
 	private float x = Main.WIDTH;
 	private Random random;
 	private Game game;
@@ -118,6 +118,54 @@ public class Enemy {
 			}
 			
 		}).start();
+	}
+	
+	public float getRed(){
+		return red;
+	}
+	
+	public float getGreen(){
+		return green;
+	}
+	
+	public float getBlue(){
+		return blue;
+	}
+	
+	public String getColorString(){
+		if(red == 1 && green == 0 && blue == 0){
+			return "Bright Red";
+		}else if(red == 0 && green == 1 && blue == 0){
+			return "Bright Green";
+		}else if(red == 0 && green == 0 && blue == 1){
+			return "Bright Blue";
+		}else if(red == 1 && green == 1 && blue == 0){
+			return "Bright Yellow";
+		}else if(red == 1 && green == 0 && blue == 1){
+			return "Bright Magenta";
+		}else if(red == 0 && green == 1 && blue == 1){
+			return "Bright Cyan";
+		}else if(red == 1 && green == 1 && blue == 1){
+			return "White";
+		}else if(red == 0 && green == 0 && blue == 0){
+			return "Black";
+		}else if(red == .5f && green == 0 && blue == 0){
+			return "Dark Red";
+		}else if(red == 0 && green == .5f && blue == 0){
+			return "Dark Green";
+		}else if(red == 0 && green == 0 && blue == .5f){
+			return "Dark Blue";
+		}else if(red == .5f && green == .5f && blue == 0){
+			return "Dark Yellow";
+		}else if(red == .5f && green == 0 && blue == .5f){
+			return "Dark Magenta";
+		}else if(red == 0 && green == .5f && blue == .5f){
+			return "Dark Cyan";
+		}else if(red == .5f && green == .5f && blue == .5f){
+			return "Gray";
+		}else{
+			return "Unknown";
+		}
 	}
 
 }

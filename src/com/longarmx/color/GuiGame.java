@@ -44,6 +44,8 @@ public class GuiGame extends Gui implements Disposable{
 	}
 	
 	public void create(){
+		super.create();
+		
 		red = new ColorButton(100, 100, buttonSize, buttonSize);
 		red.setColor(1, 0, 0, 1);
 		components.add(red);
@@ -84,6 +86,12 @@ public class GuiGame extends Gui implements Disposable{
 			manager.setColor(0, 1, 0, 1);
 			manager.draw("Paused", Main.WIDTH/2 - (int)manager.getTextWidth("Paused", 5)/2, Main.HEIGHT/2 - 25, 5, batch);
 		}
+		
+		if(!game.enemies.isEmpty()){
+			manager.draw(game.enemies.get(0).getColorString(), 651, 719, 3, batch);
+			manager.setColor(game.enemies.get(0).getRed(), game.enemies.get(0).getGreen(), game.enemies.get(0).getBlue(), 1.0f);
+			manager.draw(game.enemies.get(0).getColorString(), 650, 720, 3, batch);
+		}
 	}
 	
 	public void update(){
@@ -105,7 +113,7 @@ public class GuiGame extends Gui implements Disposable{
 	
 	@Override
 	public void dispose(){
-		
+		super.dispose();
 	}
 
 }
