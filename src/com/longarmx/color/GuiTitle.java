@@ -31,16 +31,12 @@ public class GuiTitle extends Gui implements Disposable{
 	private ClickableButton options;
 	private ClickableButton exit;
 	
-	private FontManager manager;
-	
 	public GuiTitle(){
 		create();
 	}
 	
 	public void create(){
 		super.create();
-		
-		manager = new FontManager();
 		
 		start = new ClickableButton(Main.WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
 
@@ -89,6 +85,7 @@ public class GuiTitle extends Gui implements Disposable{
 			component.render(batch);
 		}
 		
+		manager.setColor(0, 0, 0, 1);
 		manager.draw("Color Game", Main.WIDTH/2 - (int)manager.getTextWidth("Color Game", 7)/2, 600, 7, batch);
 		manager.draw("A game by Longarmx", Main.WIDTH/2 - (int)manager.getTextWidth("A game by Longarmx", 2)/2, 550, 2, batch);
 	}

@@ -28,8 +28,6 @@ public class GuiGame extends Gui implements Disposable{
 	
 	private int buttonSize = 75;
 	
-	FontManager manager;
-	
 	private Game game;
 	
 	private ColorButton red;
@@ -65,8 +63,6 @@ public class GuiGame extends Gui implements Disposable{
 		light = new ColorButton(Main.WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize);
 		light.setColor(.8f, .8f, .8f, 1);
 		components.add(light);
-		
-		manager = FontManager.getInstance();
 	}
 	
 	public void render(SpriteBatch batch){

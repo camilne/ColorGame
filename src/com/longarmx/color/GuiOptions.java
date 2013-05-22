@@ -31,8 +31,7 @@ public class GuiOptions extends Gui implements Disposable{
 	
 	private Slider volume;
 	private ClickableButton back;
-	
-	private FontManager manager;
+	private ClickableButton highscores;
 	
 	public GuiOptions(){
 		create();
@@ -41,8 +40,6 @@ public class GuiOptions extends Gui implements Disposable{
 	public void create(){
 		this.game = Main.instance;
 		super.create();
-		
-		manager = new FontManager();
 		
 		volume = new Slider(Main.WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
 
@@ -54,6 +51,19 @@ public class GuiOptions extends Gui implements Disposable{
 		});
 		sliders.add(volume);
 		volume.setHighlightColor(0, 1, 1);
+		
+		highscores = new ClickableButton(Main.WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
+			
+			@Override
+			public void onClick() {
+				game.state = States.HIGHSCORE;
+				game.highscore.setColor(r, g, b);
+			}
+			
+		});
+		clickableButtons.add(highscores);
+		highscores.setText("Highscores", 4);
+		highscores.setHighlightColor(.5f, 0, 1);
 		
 		back = new ClickableButton(Main.WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
 			

@@ -9,6 +9,7 @@ public class Gui implements Disposable{
 	
 	private Texture background;
 	protected Game game;
+	protected FontManager manager;
 	
 	protected float r = 1.0f;
 	protected float g = 1.0f;
@@ -17,6 +18,7 @@ public class Gui implements Disposable{
 	protected void create(){
 		background = new Texture(Gdx.files.internal("res/titleBackground.png"));
 		this.game = Main.instance;
+		this.manager = FontManager.getInstance();
 	}
 	
 	protected void render(SpriteBatch batch){

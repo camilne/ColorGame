@@ -30,22 +30,19 @@ public class GuiLevelSelect extends Gui {
 	ClickableButton hard;
 	ClickableButton back;
 	
-	FontManager manager;
-
 	public GuiLevelSelect() {
 		create();
 	}
 	
 	public void create(){
 		super.create();
-		manager = FontManager.getInstance();
 		
 		easy = new ClickableButton(Main.WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
 				game.state = States.GAME;
-				game.difficulty = 1;
+				game.difficulty = Difficulty.EASY.getDifficulty();
 				game.reset();
 			}
 			
@@ -59,7 +56,7 @@ public class GuiLevelSelect extends Gui {
 			@Override
 			public void onClick() {
 				game.state = States.GAME;
-				game.difficulty = 2;
+				game.difficulty = Difficulty.NORMAL.getDifficulty();
 				game.reset();
 			}
 			
@@ -73,7 +70,7 @@ public class GuiLevelSelect extends Gui {
 			@Override
 			public void onClick() {
 				game.state = States.GAME;
-				game.difficulty = 3;
+				game.difficulty = Difficulty.HARD.getDifficulty();
 				game.reset();
 			}
 			
@@ -112,6 +109,9 @@ public class GuiLevelSelect extends Gui {
 	
 	public void dispose(){
 		super.dispose();
+		for(ClickableButton button: buttons){
+			button.dispose();
+		}
 	}
 
 }

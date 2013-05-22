@@ -50,6 +50,7 @@ public class Game implements ApplicationListener{
 	GuiTitle title;
 	GuiOptions options;
 	GuiLevelSelect levelSelect;
+	GuiHighscore highscore;
 	
 	@Override
 	public void create() {
@@ -62,6 +63,7 @@ public class Game implements ApplicationListener{
 		title = new GuiTitle();
 		options = new GuiOptions();
 		levelSelect = new GuiLevelSelect();
+		highscore = new GuiHighscore();
 		
 		reset();
 		
@@ -135,6 +137,12 @@ public class Game implements ApplicationListener{
 				
 				break;
 				
+			case HIGHSCORE:
+				
+				highscore.render(batch);
+				
+				break;
+				
 			default:
 				break;
 			}
@@ -176,6 +184,12 @@ public class Game implements ApplicationListener{
 		case LEVEL_SELECT:
 			
 			levelSelect.update();
+			
+			break;
+			
+		case HIGHSCORE:
+			
+			highscore.update();
 			
 			break;
 			
