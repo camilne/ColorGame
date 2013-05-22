@@ -219,5 +219,6 @@ public class Game implements ApplicationListener{
 		title.dispose();
 		levelSelect.dispose();
 		options.dispose();
+		highscore.dispose();
 	}
 }

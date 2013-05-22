@@ -43,14 +43,25 @@ public class GuiHighscore extends Gui {
 				tmp = null;
 				tmp = new char[300];
 			}
-			if(fileString.charAt(i) != '\n' && !Character.isWhitespace(fileString.charAt(i))) tmp[i] = fileString.charAt(i);
+			if(fileString.charAt(i) != '\n' && !Character.isWhitespace(fileString.charAt(i)) && tmp[i] != ' ') tmp[i] = fileString.charAt(i);
 		}
 	}
 	
 	public void score(int score){
-		for(int i = 0; i < scores.length - 1; i++){
-			if(Integer.parseInt(scores[i + 1]) > score && i != 0){
-				Gdx.files.external("res/highscores.lgx").writeString(String.valueOf(score), false);
+		String[] localScores = scores;
+			
+		for(int i = 0; i < localScores.length - 1; i++){
+			if(Integer.parseInt(localScores[i]) > score && i != 0){
+				Gdx.files.local("res/highscores.lgx").delete();
+				for(int w = 1; w < i; w++){
+					Gdx.files.local("res/highscores.lgx").writeString(localScores[w] + "\n", true);
+				}
+				Gdx.files.local("res/highscores.lgx").writeString(String.valueOf(score) + "\n", true);
+				for(int w = i; w < localScores.length; w++){
+					Gdx.files.local("res/highscores.lgx").writeString(localScores[w] + "\n", true);
+				}
+				loadDirectory();
+				return;
 			}
 		}
 	}

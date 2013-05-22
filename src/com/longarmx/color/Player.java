@@ -137,6 +137,7 @@ public class Player implements Disposable{
 		if(!isDead){
 			death.play(game.volume);
 			isDead = true;
+			game.highscore.score(game.score);
 		}
 	}
 	
