@@ -29,4 +29,5 @@ Lime Green = R + D && G + L
 Sky Blue = G + D && B + L
 Purple = R + D && B + L
 Pink = RB + L && G + D
+Pale Blue = RG + D && B + L
 Salmon = R + L && GB + D

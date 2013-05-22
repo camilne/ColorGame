@@ -18,6 +18,7 @@ package com.longarmx.color;
 
 import java.util.Random;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -86,7 +87,14 @@ public class Enemy {
 	}
 	
 	public void switchColor(){
-		if(Game.level >= 2){
+		if(Game.level >= 4){
+			float dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
+			red = Util.boolToFloat(random.nextBoolean()) * dark;
+			dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
+			green = Util.boolToFloat(random.nextBoolean()) * dark;
+			dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
+			blue = Util.boolToFloat(random.nextBoolean()) * dark;
+		}else if(Game.level >= 2){
 			float dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
 			red = Util.boolToFloat(random.nextBoolean()) * dark;
 			green = Util.boolToFloat(random.nextBoolean()) * dark;
@@ -95,6 +103,9 @@ public class Enemy {
 			red = Util.boolToFloat(random.nextBoolean());
 			green = Util.boolToFloat(random.nextBoolean());
 			blue = Util.boolToFloat(random.nextBoolean());
+		}
+		if(!acceptableColor(red, green, blue, 1)){
+			switchColor();
 		}
 	}
 	
@@ -132,37 +143,63 @@ public class Enemy {
 		return blue;
 	}
 	
+	public boolean acceptableColor(float r, float g, float b, float a){
+		return acceptableColor(new Color(r, g, b, a));
+	}
+	
+	public boolean acceptableColor(Color color){
+		for(Color tmp: Colors.list){
+			if(color.equals(tmp))	return true;
+		}
+		return false;
+	}
+	
 	public String getColorString(){
-		if(red == 1 && green == 0 && blue == 0){
+		Color temp = new Color(red, green, blue, 1);
+		if		(temp.equals(Colors.BRIGHT_RED)){
 			return "Bright Red";
-		}else if(red == 0 && green == 1 && blue == 0){
+		}else if(temp.equals(Colors.BRIGHT_GREEN)){
 			return "Bright Green";
-		}else if(red == 0 && green == 0 && blue == 1){
+		}else if(temp.equals(Colors.BRIGHT_BLUE)){
 			return "Bright Blue";
-		}else if(red == 1 && green == 1 && blue == 0){
+		}else if(temp.equals(Colors.BRIGHT_YELLOW)){
 			return "Bright Yellow";
-		}else if(red == 1 && green == 0 && blue == 1){
+		}else if(temp.equals(Colors.BRIGHT_MAGENTA)){
 			return "Bright Magenta";
-		}else if(red == 0 && green == 1 && blue == 1){
+		}else if(temp.equals(Colors.BRIGHT_CYAN)){
 			return "Bright Cyan";
-		}else if(red == 1 && green == 1 && blue == 1){
+		}else if(temp.equals(Colors.WHITE)){
 			return "White";
-		}else if(red == 0 && green == 0 && blue == 0){
+		}else if(temp.equals(Colors.BLACK)){
 			return "Black";
-		}else if(red == .5f && green == 0 && blue == 0){
+		}else if(temp.equals(Colors.DARK_RED)){
 			return "Dark Red";
-		}else if(red == 0 && green == .5f && blue == 0){
+		}else if(temp.equals(Colors.DARK_GREEN)){
 			return "Dark Green";
-		}else if(red == 0 && green == 0 && blue == .5f){
+		}else if(temp.equals(Colors.DARK_BLUE)){
 			return "Dark Blue";
-		}else if(red == .5f && green == .5f && blue == 0){
+		}else if(temp.equals(Colors.DARK_YELLOW)){
 			return "Dark Yellow";
-		}else if(red == .5f && green == 0 && blue == .5f){
+		}else if(temp.equals(Colors.DARK_MAGENTA)){
 			return "Dark Magenta";
-		}else if(red == 0 && green == .5f && blue == .5f){
+		}else if(temp.equals(Colors.DARK_CYAN)){
 			return "Dark Cyan";
-		}else if(red == .5f && green == .5f && blue == .5f){
+		}else if(temp.equals(Colors.GRAY)){
 			return "Gray";
+		}else if(temp.equals(Colors.PURPLE)){
+			return "Purple";
+		}else if(temp.equals(Colors.SKY_BLUE)){
+			return "Sky Blue";
+		}else if(temp.equals(Colors.ORANGE)){
+			return "Orange";
+		}else if(temp.equals(Colors.LIME_GREEN)){
+			return "Lime Green";
+		}else if(temp.equals(Colors.PINK)){
+			return "Pink";
+		}else if(temp.equals(Colors.PALE_BLUE)){
+			return "Pale Blue";
+		}else if(temp.equals(Colors.SALMON)){
+			return "Salmon";
 		}else{
 			return "Unknown";
 		}

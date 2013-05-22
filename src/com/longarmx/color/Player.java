@@ -126,12 +126,10 @@ public class Player implements Disposable{
 	}
 	
 	private void setColor(){
-		if((redDown || greenDown || blueDown)){
-			if(darkDown ^ lightDown){
-				if(redDown) red = Util.boolToFloat(redDown) * (Util.boolToFloat(lightDown)/2 + .5f);
-				if(greenDown) green = Util.boolToFloat(greenDown) * (Util.boolToFloat(lightDown)/2 + .5f);
-				if(blueDown) blue = Util.boolToFloat(blueDown) * (Util.boolToFloat(lightDown)/2 + .5f);
-			}
+		if(darkDown ^ lightDown){
+			if(redDown) red = Util.boolToFloat(redDown) * (Util.boolToFloat(lightDown)/2 + .5f);
+			if(greenDown) green = Util.boolToFloat(greenDown) * (Util.boolToFloat(lightDown)/2 + .5f);
+			if(blueDown) blue = Util.boolToFloat(blueDown) * (Util.boolToFloat(lightDown)/2 + .5f);
 		}
 	}
 	

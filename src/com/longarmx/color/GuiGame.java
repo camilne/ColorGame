@@ -88,6 +88,7 @@ public class GuiGame extends Gui implements Disposable{
 		}
 		
 		if(!game.enemies.isEmpty()){
+			manager.setColor(0, 0, 0, 1);
 			manager.draw(game.enemies.get(0).getColorString(), 651, 719, 3, batch);
 			manager.setColor(game.enemies.get(0).getRed(), game.enemies.get(0).getGreen(), game.enemies.get(0).getBlue(), 1.0f);
 			manager.draw(game.enemies.get(0).getColorString(), 650, 720, 3, batch);
