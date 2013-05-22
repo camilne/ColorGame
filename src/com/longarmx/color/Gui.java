@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 public class Gui implements Disposable{
 	
 	private Texture background;
+	protected Game game;
 	
 	protected float r = 1.0f;
 	protected float g = 1.0f;
@@ -15,6 +16,7 @@ public class Gui implements Disposable{
 	
 	protected void create(){
 		background = new Texture(Gdx.files.internal("res/titleBackground.png"));
+		this.game = Main.instance;
 	}
 	
 	protected void render(SpriteBatch batch){

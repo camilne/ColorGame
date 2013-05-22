@@ -18,6 +18,6 @@ package com.longarmx.color;
 
 public enum States {
 	
-	GAME, TITLE, OPTIONS;
+	GAME, TITLE, OPTIONS, LEVEL_SELECT;
 
 }

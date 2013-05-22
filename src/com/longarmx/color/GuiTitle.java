@@ -25,8 +25,6 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class GuiTitle extends Gui implements Disposable{
 	
-	Game game;
-	
 	List<ClickableButton> components = new ArrayList<ClickableButton>();
 	
 	private ClickableButton start;
@@ -41,7 +39,6 @@ public class GuiTitle extends Gui implements Disposable{
 	
 	public void create(){
 		super.create();
-		this.game = Main.instance;
 		
 		manager = new FontManager();
 		
@@ -49,8 +46,8 @@ public class GuiTitle extends Gui implements Disposable{
 
 			@Override
 			public void onClick() {
-				game.state = States.GAME;
-				game.reset();
+				game.state = States.LEVEL_SELECT;
+				game.levelSelect.setColor(r, g, b);
 			}
 			
 		});

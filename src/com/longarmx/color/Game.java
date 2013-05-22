@@ -22,6 +22,7 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,18 +33,23 @@ public class Game implements ApplicationListener{
 	Texture background;
 	Texture overlay;
 	Player player;
-	GuiGame ui;
+	
 	List<Enemy> enemies = new ArrayList<Enemy>();
+	Color lastEnemyColor = new Color();
+	
 	int score = 0;
-	public static int level = 1;
+	public int level = 1;
+	public int difficulty = 1;
 	public float volume = 1.0f;
 	
 	boolean paused = false;
 	
 	public States state = States.TITLE;
 	
+	GuiGame ui;
 	GuiTitle title;
 	GuiOptions options;
+	GuiLevelSelect levelSelect;
 	
 	@Override
 	public void create() {
@@ -51,9 +57,11 @@ public class Game implements ApplicationListener{
 		batch = new SpriteBatch();
 		background = Util.loadTexture("res/background.png");
 		overlay = Util.loadTexture("res/overlay.png");
+		
 		ui = new GuiGame();
 		title = new GuiTitle();
 		options = new GuiOptions();
+		levelSelect = new GuiLevelSelect();
 		
 		reset();
 		
@@ -66,9 +74,10 @@ public class Game implements ApplicationListener{
 			enemies.remove(i);
 		}
 		enemies.add(new Enemy());
+		lastEnemyColor = enemies.get(0).getColor();
 		player = new Player();
-		Enemy.SPEED = 1.0f;
-		level = 1;
+		Enemy.SPEED = 1.0f * difficulty;
+		level = difficulty;
 		score = 0;
 		paused = false;
 	}
@@ -113,9 +122,19 @@ public class Game implements ApplicationListener{
 				ui.render(batch);
 				
 				break;
+				
 			case OPTIONS:
+				
 				options.render(batch);
+				
 				break;
+			
+			case LEVEL_SELECT:
+				
+				levelSelect.render(batch);
+				
+				break;
+				
 			default:
 				break;
 			}
@@ -138,12 +157,8 @@ public class Game implements ApplicationListener{
 					score++;
 					enemies.remove(i);
 					Enemy.SPEED += .2f;
-					if(Enemy.SPEED < 2){
-						level = 1;
-					}else if(Enemy.SPEED < 3){
-						level = 2;
-					}
 					enemies.add(new Enemy());
+					lastEnemyColor = enemies.get(enemies.size() - 1).getColor();
 				}else{
 					enemies.get(i).update();
 				}
@@ -155,6 +170,12 @@ public class Game implements ApplicationListener{
 		case OPTIONS:
 			
 			options.update();
+			
+			break;
+			
+		case LEVEL_SELECT:
+			
+			levelSelect.update();
 			
 			break;
 			
@@ -182,5 +203,7 @@ public class Game implements ApplicationListener{
 		player.dispose();
 		Util.dispose();
 		title.dispose();
+		levelSelect.dispose();
+		options.dispose();
 	}
 }

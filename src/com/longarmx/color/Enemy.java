@@ -87,14 +87,14 @@ public class Enemy {
 	}
 	
 	public void switchColor(){
-		if(Game.level >= 4){
+		if(game.level >= 3){
 			float dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
 			red = Util.boolToFloat(random.nextBoolean()) * dark;
 			dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
 			green = Util.boolToFloat(random.nextBoolean()) * dark;
 			dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
 			blue = Util.boolToFloat(random.nextBoolean()) * dark;
-		}else if(Game.level >= 2){
+		}else if(game.level >= 2){
 			float dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
 			red = Util.boolToFloat(random.nextBoolean()) * dark;
 			green = Util.boolToFloat(random.nextBoolean()) * dark;
@@ -143,13 +143,17 @@ public class Enemy {
 		return blue;
 	}
 	
+	public Color getColor(){
+		return new Color(red, green, blue, 1);
+	}
+	
 	public boolean acceptableColor(float r, float g, float b, float a){
 		return acceptableColor(new Color(r, g, b, a));
 	}
 	
 	public boolean acceptableColor(Color color){
 		for(Color tmp: Colors.list){
-			if(color.equals(tmp))	return true;
+			if(color.equals(tmp) && !color.equals(game.lastEnemyColor))	return true;
 		}
 		return false;
 	}
