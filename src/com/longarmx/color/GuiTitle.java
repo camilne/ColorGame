@@ -86,7 +86,7 @@ public class GuiTitle extends Gui implements Disposable{
 		}
 		
 		manager.setColor(0, 0, 0, 1);
-		manager.draw("Color Game", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("Color Game", 7)/2, 600, 7, batch);
+		manager.draw("Chromalusus", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("Chromalusus", 7)/2, 600, 7, batch);
 		manager.draw("A game by Longarmx", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("A game by Longarmx", 2)/2, 550, 2, batch);
 	}
 	
