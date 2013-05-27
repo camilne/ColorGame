@@ -26,15 +26,22 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 public class Main {
 	
-	public static final int WIDTH = 1080;
-	public static final int HEIGHT = 768;
+	public static final int ORIGINAL_WIDTH = 1080;
+	public static final int ORIGINAL_HEIGHT = 768;
+	public static int WIDTH = ORIGINAL_WIDTH;
+	public static int HEIGHT = ORIGINAL_HEIGHT;
+	
+	public static float scaleX = 1;
+	public static float scaleY = 1;
+	
 	public static Game instance;
 
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = WIDTH;
-		config.height = HEIGHT;
+		config.width = ORIGINAL_WIDTH;
+		config.height = ORIGINAL_HEIGHT;
 		config.useGL20 = true;
+		config.resizable = false;
 		config.addIcon("res/icon128.png", FileType.Internal);
 		config.addIcon("res/icon32.png", FileType.Internal);
 		config.addIcon("res/icon16.png", FileType.Internal);
@@ -45,6 +52,16 @@ public class Main {
 		}
 		instance = new Game();
 		new LwjglApplication(instance, config);
+	}
+	
+	public static void setWidth(int width){
+		WIDTH = width;
+		scaleX = WIDTH/ORIGINAL_WIDTH;
+	}
+	
+	public static void setHeight(int height){
+		HEIGHT = height;
+		scaleY = HEIGHT/ORIGINAL_HEIGHT;
 	}
 
 }

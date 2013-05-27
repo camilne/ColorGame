@@ -55,15 +55,17 @@ public class ClickableButton extends Component implements Disposable{
 		click = Gdx.audio.newSound(Gdx.files.internal("res/click.wav"));
 	}
 	
-	public void setText(String text, int scale){
+	public ClickableButton setText(String text, int scale){
 		this.text = text;
 		this.scale = scale;
+		return this;
 	}
 	
-	public void setHighlightColor(float r, float g, float b){
+	public ClickableButton setHighlightColor(float r, float g, float b){
 		this.r = r;
 		this.g = g;
 		this.b = b;
+		return this;
 	}
 	
 	public void render(SpriteBatch batch){

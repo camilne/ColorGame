@@ -37,7 +37,7 @@ public class GuiLevelSelect extends Gui {
 	public void create(){
 		super.create();
 		
-		easy = new ClickableButton(Main.WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
+		easy = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -51,7 +51,7 @@ public class GuiLevelSelect extends Gui {
 		easy.setText("Easy", 4);
 		buttons.add(easy);
 		
-		normal = new ClickableButton(Main.WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
+		normal = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -65,7 +65,7 @@ public class GuiLevelSelect extends Gui {
 		normal.setText("Normal", 4);
 		buttons.add(normal);
 		
-		hard = new ClickableButton(Main.WIDTH/2 - 250, 300, 500, 75, new ClickManager(){
+		hard = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -79,7 +79,7 @@ public class GuiLevelSelect extends Gui {
 		hard.setText("Hard", 4);
 		buttons.add(hard);
 		
-		back = new ClickableButton(Main.WIDTH/2 - 250, 100, 500, 75, new ClickManager(){
+		back = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 100, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {

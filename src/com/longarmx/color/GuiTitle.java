@@ -38,7 +38,7 @@ public class GuiTitle extends Gui implements Disposable{
 	public void create(){
 		super.create();
 		
-		start = new ClickableButton(Main.WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
+		start = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -51,7 +51,7 @@ public class GuiTitle extends Gui implements Disposable{
 		start.setText("Start Game", 4);
 		start.setHighlightColor(1, 0, 0);
 		
-		options = new ClickableButton(Main.WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
+		options = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
 			
 			@Override
 			public void onClick() {
@@ -64,7 +64,7 @@ public class GuiTitle extends Gui implements Disposable{
 		options.setText("Options", 4);
 		options.setHighlightColor(0, 1, 0);
 		
-		exit = new ClickableButton(Main.WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
+		exit = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
 			
 			@Override
 			public void onClick() {
@@ -86,8 +86,8 @@ public class GuiTitle extends Gui implements Disposable{
 		}
 		
 		manager.setColor(0, 0, 0, 1);
-		manager.draw("Color Game", Main.WIDTH/2 - (int)manager.getTextWidth("Color Game", 7)/2, 600, 7, batch);
-		manager.draw("A game by Longarmx", Main.WIDTH/2 - (int)manager.getTextWidth("A game by Longarmx", 2)/2, 550, 2, batch);
+		manager.draw("Color Game", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("Color Game", 7)/2, 600, 7, batch);
+		manager.draw("A game by Longarmx", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("A game by Longarmx", 2)/2, 550, 2, batch);
 	}
 	
 	public void update(){

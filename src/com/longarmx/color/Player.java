@@ -78,7 +78,7 @@ public class Player implements Disposable{
 		batch.setColor(new Color(red, green, blue, 1));
 		if(isShooting){
 			makeLightning();
-			batch.draw(lightning, x + width, y + height/2, 0, 0, 1, 1, Main.WIDTH - x, 3, 0);
+			batch.draw(lightning, x + width, y + height/2, 0, 0, 1, 1, Main.ORIGINAL_WIDTH - x, 3, 0);
 		}
 		batch.draw(player, x, y, width, height);
 		batch.setColor(1, 1, 1, 1);

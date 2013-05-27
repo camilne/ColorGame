@@ -27,7 +27,7 @@ public class Enemy {
 	private float red = 1.0f;
 	private float green = 1.0f;
 	private float blue = 1.0f;
-	private float x = Main.WIDTH;
+	private float x = Main.ORIGINAL_WIDTH;
 	private Random random;
 	private Game game;
 	public boolean isDead = false;

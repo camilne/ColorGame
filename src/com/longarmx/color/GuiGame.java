@@ -56,11 +56,11 @@ public class GuiGame extends Gui implements Disposable{
 		blue.setColor(0, 0, 1, 1);
 		components.add(blue);
 		
-		dark = new ColorButton(Main.WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize);
+		dark = new ColorButton(Main.ORIGINAL_WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize);
 		dark.setColor(.3f, .3f, .3f, 1);
 		components.add(dark);
 		
-		light = new ColorButton(Main.WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize);
+		light = new ColorButton(Main.ORIGINAL_WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize);
 		light.setColor(.8f, .8f, .8f, 1);
 		components.add(light);
 	}
@@ -73,14 +73,14 @@ public class GuiGame extends Gui implements Disposable{
 		}
 		
 		manager.setColor(0, 0, 0, 1);
-		manager.draw("Score: " + String.valueOf(game.score), 10, Main.HEIGHT - 60, 5, batch);
+		manager.draw("Score: " + String.valueOf(game.score), 10, Main.ORIGINAL_HEIGHT - 60, 5, batch);
 		
 		if(game.player.isDead){
 			manager.setColor(1, 0, 0, 1);
-			manager.draw("Game Over", Main.WIDTH/2 - (int)manager.getTextWidth("Game Over", 5)/2, Main.HEIGHT/2 - 25, 5, batch);
+			manager.draw("Game Over", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("Game Over", 5)/2, Main.ORIGINAL_HEIGHT/2 - 25, 5, batch);
 		}else if(game.paused){
 			manager.setColor(0, 1, 0, 1);
-			manager.draw("Paused", Main.WIDTH/2 - (int)manager.getTextWidth("Paused", 5)/2, Main.HEIGHT/2 - 25, 5, batch);
+			manager.draw("Paused", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("Paused", 5)/2, Main.ORIGINAL_HEIGHT/2 - 25, 5, batch);
 		}
 		
 		if(!game.enemies.isEmpty()){

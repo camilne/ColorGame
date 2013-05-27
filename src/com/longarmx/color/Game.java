@@ -86,7 +86,8 @@ public class Game implements ApplicationListener{
 
 	@Override
 	public void resize(int width, int height) {
-		
+		Main.setWidth(width);
+		Main.setHeight(height);
 	}
 
 	@Override
@@ -110,7 +111,7 @@ public class Game implements ApplicationListener{
 				batch.disableBlending();
 				if(player.isDead) batch.setColor(.9f, .9f, .9f, 1);
 				else batch.setColor(1, 1, 1, 1);
-				batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
+				batch.draw(background, 0, 0, Main.ORIGINAL_WIDTH, Main.ORIGINAL_HEIGHT);
 				player.render(batch);
 				
 				for(Enemy enemy : enemies){
@@ -119,7 +120,7 @@ public class Game implements ApplicationListener{
 				
 				batch.setColor(1, 1, 1, 1);
 				batch.enableBlending();
-				batch.draw(overlay, 0, 0, Main.WIDTH, Main.HEIGHT);
+				batch.draw(overlay, 0, 0, Main.ORIGINAL_WIDTH, Main.ORIGINAL_HEIGHT);
 				
 				ui.render(batch);
 				

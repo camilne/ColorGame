@@ -133,14 +133,14 @@ public class Input implements InputProcessor{
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		mouseX = screenX;
+		mouseX = (int) (screenX * Main.scaleX);
 		mouseY = Main.HEIGHT - screenY;
 		return false;
 	}
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		mouseX = screenX;
+		mouseX = (int) (screenX * Main.scaleX);
 		mouseY = Main.HEIGHT - screenY;
 		return false;
 	}

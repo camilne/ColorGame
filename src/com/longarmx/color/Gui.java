@@ -23,20 +23,20 @@ public class Gui implements Disposable{
 	
 	protected void render(SpriteBatch batch){
 		batch.setColor(r, g, b, 1);
-		batch.draw(background, 0, 0, Main.WIDTH, Main.HEIGHT);
+		batch.draw(background, 0, 0, Main.ORIGINAL_WIDTH, Main.ORIGINAL_HEIGHT);
 	}
 	
 	protected void update(){
 		
-		r = (float)Input.mouseX/Main.WIDTH;
+		r = (float)Input.mouseX/Main.ORIGINAL_WIDTH;
 		if(r > .9f)	r = 0.9f;
 		if(r < .1f)	r = 0.1f;
 		
-		g = (float)(Main.HEIGHT - Input.mouseY)/Main.HEIGHT;
+		g = (float)(Main.ORIGINAL_HEIGHT - Input.mouseY)/Main.ORIGINAL_HEIGHT;
 		if(g > .9f)	g = 0.9f;
 		if(g < .1f)	g = 0.1f;
 		
-		b = (float)(Main.WIDTH - Input.mouseX)/Main.HEIGHT;
+		b = (float)(Main.ORIGINAL_WIDTH - Input.mouseX)/Main.ORIGINAL_HEIGHT;
 		if(b > .9f)	b = 0.9f;
 		if(b < .1f)	b = 0.1f;
 	}

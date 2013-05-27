@@ -41,7 +41,7 @@ public class GuiOptions extends Gui implements Disposable{
 		this.game = Main.instance;
 		super.create();
 		
-		volume = new Slider(Main.WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
+		volume = new Slider(Main.ORIGINAL_WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -52,7 +52,7 @@ public class GuiOptions extends Gui implements Disposable{
 		sliders.add(volume);
 		volume.setHighlightColor(0, 1, 1);
 		
-		highscores = new ClickableButton(Main.WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
+		highscores = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
 			
 			@Override
 			public void onClick() {
@@ -65,7 +65,7 @@ public class GuiOptions extends Gui implements Disposable{
 		highscores.setText("Highscores", 4);
 		highscores.setHighlightColor(.5f, 0, 1);
 		
-		back = new ClickableButton(Main.WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
+		back = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
 			
 			@Override
 			public void onClick() {
@@ -91,7 +91,7 @@ public class GuiOptions extends Gui implements Disposable{
 			slider.render(batch);
 		}
 		
-		manager.draw("Options", Main.WIDTH/2 - (int)manager.getTextWidth("Options", 7)/2, 600, 7, batch);
+		manager.draw("Options", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("Options", 7)/2, 600, 7, batch);
 		manager.draw("Volume: ", volume.x - (int)manager.getTextWidth("Volume: ", 3), 500 + volume.height/2 - (int)manager.getTextHeight(3)/2, 3, batch);
 	}
 	
