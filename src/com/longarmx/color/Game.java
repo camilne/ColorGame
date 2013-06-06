@@ -40,7 +40,13 @@ public class Game implements ApplicationListener{
 	int score = 0;
 	public int level = 1;
 	public int difficulty = 1;
-	public float volume = 1.0f;
+	
+	public float soundVolume = 1.0f;
+	public float masterSound = 1.0f;
+	public boolean soundMuted = false;
+	public float musicVolume = 1.0f;
+
+	MidiPlayer midiPlayer;
 	
 	boolean paused = false;
 	
@@ -59,6 +65,10 @@ public class Game implements ApplicationListener{
 		background = Util.loadTexture("res/background.png");
 		overlay = Util.loadTexture("res/overlay.png");
 		
+		midiPlayer = new MidiPlayer("res/title_music.mid");
+		midiPlayer.setLooping(true);
+		midiPlayer.start();
+
 		ui = new GuiGame();
 		title = new GuiTitle();
 		options = new GuiOptions();
@@ -68,7 +78,7 @@ public class Game implements ApplicationListener{
 		reset();
 		
 		Runtime runtime = Runtime.getRuntime();
-		System.out.println("Total RAM used: " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024*1024)) + "MB");
+		System.out.println("Total RAM used: " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024)) + "KB");
 	}
 	
 	public void reset(){
@@ -151,6 +161,7 @@ public class Game implements ApplicationListener{
 	}
 	
 	private void update(){
+		masterSound = soundVolume * Util.boolToInt(!soundMuted);
 		switch(state){
 		
 		case TITLE:
@@ -214,6 +225,7 @@ public class Game implements ApplicationListener{
 		batch.dispose();
 		background.dispose();
 		overlay.dispose();
+		midiPlayer.dispose();
 		ui.dispose();
 		player.dispose();
 		Util.dispose();

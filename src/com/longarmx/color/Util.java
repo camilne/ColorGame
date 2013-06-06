@@ -36,7 +36,7 @@ public class Util{
 		return new Texture(Gdx.files.internal(path));
 	}
 	
-	public static float boolToFloat(boolean bool){
+	public static int boolToInt(boolean bool){
 		return bool ? 1 : 0;
 	}
 	

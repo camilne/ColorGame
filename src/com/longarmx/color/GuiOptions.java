@@ -26,12 +26,15 @@ public class GuiOptions extends Gui implements Disposable{
 	
 	Game game;
 	
-	List<ClickableButton> clickableButtons = new ArrayList<ClickableButton>();
-	List<Slider> sliders = new ArrayList<Slider>();
+	List<ComponentClickableButton> clickableButtons = new ArrayList<ComponentClickableButton>();
+	List<ComponentSlider> sliders = new ArrayList<ComponentSlider>();
 	
-	private Slider volume;
-	private ClickableButton back;
-	private ClickableButton highscores;
+	private ComponentSlider soundVolume;
+	private ComponentSlider musicVolume;
+	private ComponentClickableButton soundMute;
+	private ComponentClickableButton musicMute;
+	private ComponentClickableButton back;
+	private ComponentClickableButton highscores;
 	
 	public GuiOptions(){
 		create();
@@ -41,7 +44,7 @@ public class GuiOptions extends Gui implements Disposable{
 		this.game = Main.instance;
 		super.create();
 		
-		volume = new Slider(Main.ORIGINAL_WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
+		soundVolume = new ComponentSlider(Main.ORIGINAL_WIDTH/2 - 250, 500, 500, 50, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -49,10 +52,57 @@ public class GuiOptions extends Gui implements Disposable{
 			}
 			
 		});
-		sliders.add(volume);
-		volume.setHighlightColor(0, 1, 1);
+		sliders.add(soundVolume);
+		soundVolume.setHighlightColor(0, 1, 1);
 		
-		highscores = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
+		soundMute = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 + 300, 500, 100, 50, new ClickManager() {
+			
+			@Override
+			public void onClick() {
+				if(game.soundMuted){
+					game.soundMuted = false;
+					soundMute.setText("Mute", 2);
+				}else{
+					game.soundMuted = true;
+					soundMute.setText("Unmute", 2);
+				}
+			}
+			
+		});
+		clickableButtons.add(soundMute);
+		soundMute.setText("Mute", 2);
+		soundMute.setHighlightColor(1, .5f, .5f);
+		
+		musicVolume = new ComponentSlider(Main.ORIGINAL_WIDTH/2 - 250, 400, 500, 50, new ClickManager(){
+
+			@Override
+			public void onClick() {
+				game.midiPlayer.setVolume(musicVolume.getValue());
+			}
+			
+		});
+		sliders.add(musicVolume);
+		musicVolume.setHighlightColor(.5f, .5f, 1);
+		
+		musicMute = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 + 300, 400, 100, 50, new ClickManager() {
+			
+			@Override
+			public void onClick() {
+				if(game.midiPlayer.isPlaying){
+					game.midiPlayer.stop();
+					musicMute.setText("Unmute", 2);
+				}else{
+					game.midiPlayer.start();
+					musicMute.setText("Mute", 2);
+				}
+			}
+			
+		});
+		clickableButtons.add(musicMute);
+		musicMute.setText("Mute", 2);
+		musicMute.setHighlightColor(1, .5f, 1);
+		
+		highscores = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
 			
 			@Override
 			public void onClick() {
@@ -65,7 +115,7 @@ public class GuiOptions extends Gui implements Disposable{
 		highscores.setText("Highscores", 4);
 		highscores.setHighlightColor(.5f, 0, 1);
 		
-		back = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
+		back = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
 			
 			@Override
 			public void onClick() {
@@ -83,28 +133,30 @@ public class GuiOptions extends Gui implements Disposable{
 		super.render(batch);
 		
 		batch.setColor(1, 1, 1, 1);
-		for(ClickableButton component: clickableButtons){
+		for(ComponentClickableButton component: clickableButtons){
 			component.render(batch);
 		}
 		
-		for(Slider slider: sliders){
+		for(ComponentSlider slider: sliders){
 			slider.render(batch);
 		}
 		
 		manager.draw("Options", Main.ORIGINAL_WIDTH/2 - (int)manager.getTextWidth("Options", 7)/2, 600, 7, batch);
-		manager.draw("Volume: ", volume.x - (int)manager.getTextWidth("Volume: ", 3), 500 + volume.height/2 - (int)manager.getTextHeight(3)/2, 3, batch);
+		manager.draw("Sound: ", soundVolume.x - (int)manager.getTextWidth("Sound: ", 3), soundVolume.y + soundVolume.height/2 - (int)manager.getTextHeight(3)/2, 3, batch);
+		manager.draw("Music: ", musicVolume.x - (int)manager.getTextWidth("Music: ", 3), musicVolume.y + musicVolume.height/2 - (int)manager.getTextHeight(3)/2, 3, batch);
 	}
 	
 	public void update(){
 		super.update();
-		for(ClickableButton clickableButton: clickableButtons){
+		for(ComponentClickableButton clickableButton: clickableButtons){
 			clickableButton.update();
 		}
 		
-		for(Slider slider: sliders){
+		for(ComponentSlider slider: sliders){
 			slider.update();
 		}
-		game.volume = volume.getValue();
+		game.soundVolume = soundVolume.getValue();
+		game.musicVolume = musicVolume.getValue();
 	}
 
 	@Override

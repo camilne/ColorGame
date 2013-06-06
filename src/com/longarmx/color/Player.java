@@ -97,7 +97,7 @@ public class Player implements Disposable{
 				@Override
 				public void run() {
 					isShooting = true;
-					shoot.play(game.volume);
+					shoot.play(game.masterSound);
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
@@ -127,15 +127,15 @@ public class Player implements Disposable{
 	
 	private void setColor(){
 		if(darkDown ^ lightDown){
-			if(redDown) red = Util.boolToFloat(redDown) * (Util.boolToFloat(lightDown)/2 + .5f);
-			if(greenDown) green = Util.boolToFloat(greenDown) * (Util.boolToFloat(lightDown)/2 + .5f);
-			if(blueDown) blue = Util.boolToFloat(blueDown) * (Util.boolToFloat(lightDown)/2 + .5f);
+			if(redDown) red = Util.boolToInt(redDown) * (Util.boolToInt(lightDown)/2 + .5f);
+			if(greenDown) green = Util.boolToInt(greenDown) * (Util.boolToInt(lightDown)/2 + .5f);
+			if(blueDown) blue = Util.boolToInt(blueDown) * (Util.boolToInt(lightDown)/2 + .5f);
 		}
 	}
 	
 	public void die(){
 		if(!isDead){
-			death.play(game.volume);
+			death.play(game.masterSound);
 			isDead = true;
 			game.highscore.score(game.score);
 		}

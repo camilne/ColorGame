@@ -30,11 +30,11 @@ public class GuiGame extends Gui implements Disposable{
 	
 	private Game game;
 	
-	private ColorButton red;
-	private ColorButton green;
-	private ColorButton blue;
-	private ColorButton dark;
-	private ColorButton light;
+	private ComponentColorButton red;
+	private ComponentColorButton green;
+	private ComponentColorButton blue;
+	private ComponentColorButton dark;
+	private ComponentColorButton light;
 	
 	public GuiGame(){
 		this.game = Main.instance;
@@ -44,23 +44,23 @@ public class GuiGame extends Gui implements Disposable{
 	public void create(){
 		super.create();
 		
-		red = new ColorButton(100, 100, buttonSize, buttonSize);
+		red = new ComponentColorButton(100, 100, buttonSize, buttonSize);
 		red.setColor(1, 0, 0, 1);
 		components.add(red);
 		
-		green = new ColorButton(200, 100, buttonSize, buttonSize);
+		green = new ComponentColorButton(200, 100, buttonSize, buttonSize);
 		green.setColor(0, 1, 0, 1);
 		components.add(green);
 		
-		blue = new ColorButton(300, 100, buttonSize, buttonSize);
+		blue = new ComponentColorButton(300, 100, buttonSize, buttonSize);
 		blue.setColor(0, 0, 1, 1);
 		components.add(blue);
 		
-		dark = new ColorButton(Main.ORIGINAL_WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize);
+		dark = new ComponentColorButton(Main.ORIGINAL_WIDTH - (200 + buttonSize), 100, buttonSize, buttonSize);
 		dark.setColor(.3f, .3f, .3f, 1);
 		components.add(dark);
 		
-		light = new ColorButton(Main.ORIGINAL_WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize);
+		light = new ComponentColorButton(Main.ORIGINAL_WIDTH - (100 + buttonSize), 100, buttonSize, buttonSize);
 		light.setColor(.8f, .8f, .8f, 1);
 		components.add(light);
 	}

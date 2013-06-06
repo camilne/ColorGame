@@ -13,11 +13,10 @@ import com.badlogic.gdx.utils.Sort;
 
 public class GuiHighscore extends Gui {
 	
-	ClickableButton back;
-	ClickableButton resetScores;
-	ClickableButton refresh;
+	ComponentClickableButton back;
+	ComponentClickableButton resetScores;
 	
-	List<ClickableButton> buttons = new ArrayList<ClickableButton>();
+	List<ComponentClickableButton> buttons = new ArrayList<ComponentClickableButton>();
 	
 	FileHandle path;
 	
@@ -33,7 +32,7 @@ public class GuiHighscore extends Gui {
 		if(!Gdx.files.local("res/highscores.lgx").exists())	makeFile();
 		path = Gdx.files.local("res/highscores.lgx");
 		
-		back = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
+		back = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
 
 			@Override
 			public void onClick() {
@@ -46,7 +45,7 @@ public class GuiHighscore extends Gui {
 		back.setHighlightColor(1, 1, .5f);
 		back.setText("Back", 4);
 		
-		resetScores = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 75, 100, 150, 50, new ClickManager() {
+		resetScores = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 75, 100, 150, 50, new ClickManager() {
 
 			@Override
 			public void onClick() {
@@ -56,33 +55,7 @@ public class GuiHighscore extends Gui {
 		});
 		buttons.add(resetScores);
 		resetScores.setHighlightColor(1, 0, 0);
-		resetScores.setText("Reset Scores", 1);
-		
-		refresh = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 75 + 200, 100, 150, 50, new ClickManager() {
-
-			@Override
-			public void onClick() {
-				loadDirectory();
-			}
-			
-		});
-		buttons.add(refresh);
-		refresh.setHighlightColor(1, 0, 0);
-		refresh.setText("Refresh", 1);
-		
-		for(int i = 0; i <= 10; i++){
-			final int score1 = i;
-			buttons.add(new ClickableButton(100, 700 - (i * 20), 50, 20, new ClickManager() {
-
-			@Override
-			public void onClick() {
-				score(score1);
-			}
-			
-		}).setText(String.valueOf(i), 1).setHighlightColor(1, .5f, .5f));
-			
-		}
-		
+		resetScores.setText("Reset Scores", 1);	
 		
 		loadDirectory();
 		
@@ -161,14 +134,14 @@ public class GuiHighscore extends Gui {
 	
 	public void update(){
 		super.update();
-		for(ClickableButton button : buttons){
+		for(ComponentClickableButton button : buttons){
 			button.update();
 		}
 	}
 	
 	public void render(SpriteBatch batch){
 		super.render(batch);
-		for(ClickableButton button : buttons){
+		for(ComponentClickableButton button : buttons){
 			button.render(batch);
 		}
 		
@@ -181,7 +154,7 @@ public class GuiHighscore extends Gui {
 	
 	public void dispose(){
 		super.dispose();
-		for(ClickableButton button : buttons){
+		for(ComponentClickableButton button : buttons){
 			button.dispose();
 		}
 	}

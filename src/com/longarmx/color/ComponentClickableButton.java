@@ -21,7 +21,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
-public class ClickableButton extends Component implements Disposable{
+public class ComponentClickableButton extends Component implements Disposable{
 	
 	private static int srcX = 50;
 	private static int srcY = 50;
@@ -38,13 +38,13 @@ public class ClickableButton extends Component implements Disposable{
 	private float g = .9f;
 	private float b = .9f;
 	
-	public ClickableButton(int x, int y, ClickManager clickManager) {
+	public ComponentClickableButton(int x, int y, ClickManager clickManager) {
 		super(x, y, srcX, srcY, srcWidth, srcHeight);
 		this.clickManager = clickManager;
 		create();
 	}
 
-	public ClickableButton(int x, int y, int width, int height, ClickManager clickManager) {
+	public ComponentClickableButton(int x, int y, int width, int height, ClickManager clickManager) {
 		super(x, y, width, height, srcX, srcY, srcWidth, srcHeight);
 		this.clickManager = clickManager;
 		create();
@@ -55,13 +55,13 @@ public class ClickableButton extends Component implements Disposable{
 		click = Gdx.audio.newSound(Gdx.files.internal("res/click.wav"));
 	}
 	
-	public ClickableButton setText(String text, int scale){
+	public ComponentClickableButton setText(String text, int scale){
 		this.text = text;
 		this.scale = scale;
 		return this;
 	}
 	
-	public ClickableButton setHighlightColor(float r, float g, float b){
+	public ComponentClickableButton setHighlightColor(float r, float g, float b){
 		this.r = r;
 		this.g = g;
 		this.b = b;
@@ -93,7 +93,7 @@ public class ClickableButton extends Component implements Disposable{
 	
 	private void click(){
 		clickManager.onClick();
-		click.play(game.volume);
+		click.play(game.masterSound);
 	}
 	
 	@Override

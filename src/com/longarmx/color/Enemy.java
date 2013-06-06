@@ -88,21 +88,21 @@ public class Enemy {
 	
 	public void switchColor(){
 		if(game.level >= 3){
-			float dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
-			red = Util.boolToFloat(random.nextBoolean()) * dark;
-			dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
-			green = Util.boolToFloat(random.nextBoolean()) * dark;
-			dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
-			blue = Util.boolToFloat(random.nextBoolean()) * dark;
+			float dark = Util.boolToInt(random.nextBoolean())/2 + .5f;
+			red = Util.boolToInt(random.nextBoolean()) * dark;
+			dark = Util.boolToInt(random.nextBoolean())/2 + .5f;
+			green = Util.boolToInt(random.nextBoolean()) * dark;
+			dark = Util.boolToInt(random.nextBoolean())/2 + .5f;
+			blue = Util.boolToInt(random.nextBoolean()) * dark;
 		}else if(game.level >= 2){
-			float dark = Util.boolToFloat(random.nextBoolean())/2 + .5f;
-			red = Util.boolToFloat(random.nextBoolean()) * dark;
-			green = Util.boolToFloat(random.nextBoolean()) * dark;
-			blue = Util.boolToFloat(random.nextBoolean()) * dark;
+			float dark = Util.boolToInt(random.nextBoolean())/2 + .5f;
+			red = Util.boolToInt(random.nextBoolean()) * dark;
+			green = Util.boolToInt(random.nextBoolean()) * dark;
+			blue = Util.boolToInt(random.nextBoolean()) * dark;
 		}else{
-			red = Util.boolToFloat(random.nextBoolean());
-			green = Util.boolToFloat(random.nextBoolean());
-			blue = Util.boolToFloat(random.nextBoolean());
+			red = Util.boolToInt(random.nextBoolean());
+			green = Util.boolToInt(random.nextBoolean());
+			blue = Util.boolToInt(random.nextBoolean());
 		}
 		if(!acceptableColor(red, green, blue, 1)){
 			switchColor();

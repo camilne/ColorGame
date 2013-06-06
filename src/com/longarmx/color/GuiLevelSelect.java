@@ -23,12 +23,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GuiLevelSelect extends Gui {
 	
-	public List<ClickableButton> buttons = new ArrayList<ClickableButton>();
+	public List<ComponentClickableButton> buttons = new ArrayList<ComponentClickableButton>();
 	
-	ClickableButton easy;
-	ClickableButton normal;
-	ClickableButton hard;
-	ClickableButton back;
+	ComponentClickableButton easy;
+	ComponentClickableButton normal;
+	ComponentClickableButton hard;
+	ComponentClickableButton back;
 	
 	public GuiLevelSelect() {
 		create();
@@ -37,7 +37,7 @@ public class GuiLevelSelect extends Gui {
 	public void create(){
 		super.create();
 		
-		easy = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
+		easy = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 500, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -51,7 +51,7 @@ public class GuiLevelSelect extends Gui {
 		easy.setText("Easy", 4);
 		buttons.add(easy);
 		
-		normal = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
+		normal = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -65,7 +65,7 @@ public class GuiLevelSelect extends Gui {
 		normal.setText("Normal", 4);
 		buttons.add(normal);
 		
-		hard = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager(){
+		hard = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -79,7 +79,7 @@ public class GuiLevelSelect extends Gui {
 		hard.setText("Hard", 4);
 		buttons.add(hard);
 		
-		back = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 100, 500, 75, new ClickManager(){
+		back = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 100, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -95,21 +95,21 @@ public class GuiLevelSelect extends Gui {
 	
 	public void update(){
 		super.update();
-		for(ClickableButton button: buttons){
+		for(ComponentClickableButton button: buttons){
 			button.update();
 		}
 	}
 	
 	public void render(SpriteBatch batch){
 		super.render(batch);
-		for(ClickableButton button: buttons){
+		for(ComponentClickableButton button: buttons){
 			button.render(batch);
 		}
 	}
 	
 	public void dispose(){
 		super.dispose();
-		for(ClickableButton button: buttons){
+		for(ComponentClickableButton button: buttons){
 			button.dispose();
 		}
 	}

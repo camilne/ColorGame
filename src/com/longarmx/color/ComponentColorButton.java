@@ -19,7 +19,7 @@ package com.longarmx.color;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class ColorButton extends Component {
+public class ComponentColorButton extends Component {
 	
 	private static int srcX = 0;
 	private static int srcY = 50;
@@ -28,11 +28,11 @@ public class ColorButton extends Component {
 	
 	private Color color = new Color(1, 1, 1, 1);
 	
-	public ColorButton(int x, int y) {
+	public ComponentColorButton(int x, int y) {
 		super(x, y, srcX, srcY, srcWidth, srcHeight);
 	}
 
-	public ColorButton(int x, int y, int width, int height) {
+	public ComponentColorButton(int x, int y, int width, int height) {
 		super(x, y, width, height, srcX, srcY, srcWidth, srcHeight);
 	}
 

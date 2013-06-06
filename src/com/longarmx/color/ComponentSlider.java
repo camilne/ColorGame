@@ -20,7 +20,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
-public class Slider extends Component{
+public class ComponentSlider extends Component{
 	
 	private static int srcX = 0;
 	private static int srcY = 100;
@@ -40,13 +40,13 @@ public class Slider extends Component{
 	
 	private ClickManager clickManager;
 
-	public Slider(int x, int y, ClickManager clickManager) {
+	public ComponentSlider(int x, int y, ClickManager clickManager) {
 		super(x, y, srcX, srcY, srcWidth, srcHeight);
 		this.clickManager = clickManager;
 		create();
 	}
 
-	public Slider(int x, int y, int width, int height, ClickManager clickManager) {
+	public ComponentSlider(int x, int y, int width, int height, ClickManager clickManager) {
 		super(x, y, width, height, srcX, srcY, srcWidth, srcHeight);
 		this.clickManager = clickManager;
 		create();

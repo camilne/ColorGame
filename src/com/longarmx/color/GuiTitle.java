@@ -25,11 +25,11 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class GuiTitle extends Gui implements Disposable{
 	
-	List<ClickableButton> components = new ArrayList<ClickableButton>();
+	List<ComponentClickableButton> components = new ArrayList<ComponentClickableButton>();
 	
-	private ClickableButton start;
-	private ClickableButton options;
-	private ClickableButton exit;
+	private ComponentClickableButton start;
+	private ComponentClickableButton options;
+	private ComponentClickableButton exit;
 	
 	public GuiTitle(){
 		create();
@@ -38,7 +38,7 @@ public class GuiTitle extends Gui implements Disposable{
 	public void create(){
 		super.create();
 		
-		start = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
+		start = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 400, 500, 75, new ClickManager(){
 
 			@Override
 			public void onClick() {
@@ -51,7 +51,7 @@ public class GuiTitle extends Gui implements Disposable{
 		start.setText("Start Game", 4);
 		start.setHighlightColor(1, 0, 0);
 		
-		options = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
+		options = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 300, 500, 75, new ClickManager() {
 			
 			@Override
 			public void onClick() {
@@ -64,7 +64,7 @@ public class GuiTitle extends Gui implements Disposable{
 		options.setText("Options", 4);
 		options.setHighlightColor(0, 1, 0);
 		
-		exit = new ClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
+		exit = new ComponentClickableButton(Main.ORIGINAL_WIDTH/2 - 250, 200, 500, 75, new ClickManager() {
 			
 			@Override
 			public void onClick() {
@@ -81,7 +81,7 @@ public class GuiTitle extends Gui implements Disposable{
 		super.render(batch);
 		
 		batch.setColor(1, 1, 1, 1);
-		for(ClickableButton component: components){
+		for(ComponentClickableButton component: components){
 			component.render(batch);
 		}
 		
@@ -92,7 +92,7 @@ public class GuiTitle extends Gui implements Disposable{
 	
 	public void update(){
 		super.update();
-		for(ClickableButton component: components){
+		for(ComponentClickableButton component: components){
 			component.update();
 		}
 	}
