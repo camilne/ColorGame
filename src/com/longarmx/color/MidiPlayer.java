@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Receiver;
@@ -39,7 +40,7 @@ public class MidiPlayer {
 	public MidiPlayer(String path) {
 		try {
 			sequence = MidiSystem.getSequence(new File(path));
-			sequencer = MidiSystem.getSequencer();
+			sequencer = getSequencer();
 			sequencer.open();
 			sequencer.setSequence(sequence);
 			receiver = MidiSystem.getReceiver();
@@ -47,6 +48,24 @@ public class MidiPlayer {
 				| IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private Sequencer getSequencer(){
+		MidiDevice.Info[] midiInfo = MidiSystem.getMidiDeviceInfo();
+		for(int i = 0; i< midiInfo.length; i++){
+			if(midiInfo[i].getName().indexOf("Sequencer") != -1){
+				System.out.println("Found sequencer: " + midiInfo[i].getName());
+				//return (Sequencer) MidiSystem.getMidiDevice(midiInfo[i]);
+			}
+		}
+		//System.err.println("Unable to find sequencer in device info...");
+		try {
+			return MidiSystem.getSequencer();
+		} catch (MidiUnavailableException e) {
+			e.printStackTrace();
+		}
+		System.err.println("System does not have sequencer...");
+		return null;
 	}
 
 	public void start() {
