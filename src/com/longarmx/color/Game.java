@@ -28,41 +28,68 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * This class is essentially the heart and brain of the application. Everything goes on in here.
+ */
 public class Game implements ApplicationListener{
 	
+	// The SpriteBatch instance.
 	SpriteBatch batch;
+	
+	// The background texture.
 	Texture background;
+	// The overlay texture of a light over on the left side.
 	Texture overlay;
+	
+	// The player instance.
 	Player player;
 	
+	// An ArrayList of all of the enemies.
 	List<Enemy> enemies = new ArrayList<Enemy>();
+	// The last enemies color. Used so that enemies are always different colors.
 	Color lastEnemyColor = new Color();
 	
+	// The player's score.
 	public int score = 0;
+	// The player's multiplier.
 	public int multiplier = 1;
 	
+	// The current level.
 	public int level = 1;
+	// The difficulty level. Easy:1 ; Normal:2 ; Hard:3
 	public int difficulty = 1;
 	
+	// The sound volume without taking muting into effect.
 	public float soundVolume = 1.0f;
+	// The total sound volume.
 	public float masterSound = 1.0f;
+	// Whether the sound is muted or not.
 	public boolean soundMuted = false;
+	// The music volume.
 	public float musicVolume = 1.0f;
 
+	// The music instance.
 	Music music;
 	
+	// Whether the game is paused or not.
 	boolean paused = false;
 	
+	// The current game state.
 	public States state = States.TITLE;
 	
+	// All of the Gui instances for each state.
 	GuiGame ui;
 	GuiTitle title;
 	GuiOptions options;
 	GuiLevelSelect levelSelect;
 	GuiHighscore highscore;
 	
+	/**
+	 * The main initialization.
+	 */
 	@Override
 	public void create() {
+		// Sets the input processor to be the Input class.
 		Gdx.input.setInputProcessor(new Input());
 		batch = new SpriteBatch();
 		background = Util.loadTexture("res/background.png");
@@ -78,14 +105,20 @@ public class Game implements ApplicationListener{
 		
 		reset();
 		
+		// Used to get the current memory used by the JRE. Useful to detect memory leaks.
 		Runtime runtime = Runtime.getRuntime();
 		System.out.println("Total RAM used: " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024)) + "KB");
 	}
 	
+	/**
+	 * Resets the game.
+	 */
 	public void reset(){
+		
 		for(int i = 0; i < enemies.size(); i++){
 			enemies.remove(i);
 		}
+		
 		enemies.add(new Enemy());
 		lastEnemyColor = enemies.get(0).getColor();
 		Enemy.SPEED = 1.0f * difficulty;
@@ -100,6 +133,9 @@ public class Game implements ApplicationListener{
 		paused = false;
 	}
 	
+	/**
+	 * Starts the background music and loops it.
+	 */
 	public void startMusic(){
 		music = Gdx.audio.newMusic(Gdx.files.internal("res/title_music.ogg"));
 		music.setLooping(true);
@@ -117,7 +153,9 @@ public class Game implements ApplicationListener{
 	public void render() {
 			if(!paused) update();
 			
+			// Makes the background a very light gray.
 			Gdx.gl.glClearColor(0.95f, 0.95f, 0.95f, 1);
+			// Clears the screen.
 			Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 			
 			batch.begin();
@@ -132,6 +170,7 @@ public class Game implements ApplicationListener{
 			case GAME:
 				
 				batch.disableBlending();
+				// Tints the screen when the player is dead.
 				if(player.isDead) batch.setColor(.9f, .9f, .9f, 1);
 				else batch.setColor(1, 1, 1, 1);
 				batch.draw(background, 0, 0, Main.ORIGINAL_WIDTH, Main.ORIGINAL_HEIGHT);
@@ -186,9 +225,11 @@ public class Game implements ApplicationListener{
 		case GAME:
 			
 			for(int i = 0; i < enemies.size(); i++){
+				// If the enemy is dead and disposed.
 				if(enemies.get(i).forDestruction){
 					score += multiplier;
 					enemies.remove(i);
+					// Make the enemies faster.
 					Enemy.SPEED += .1f * difficulty;
 					enemies.add(new Enemy());
 					lastEnemyColor = enemies.get(enemies.size() - 1).getColor();
@@ -197,6 +238,7 @@ public class Game implements ApplicationListener{
 				}
 			}
 			
+			// Returns to the title screen if the escape key is pressed.
 			if(Gdx.input.isKeyPressed(Keys.ESCAPE)) state = States.TITLE;
 			
 			break;

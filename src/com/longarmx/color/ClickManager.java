@@ -16,6 +16,9 @@
 
 package com.longarmx.color;
 
+/**
+ * An interface used to hold what a button should do when it is clicked.
+ */
 public interface ClickManager {
 	
 	public abstract void onClick();

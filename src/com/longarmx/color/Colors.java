@@ -21,10 +21,18 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
 
+/**
+ * A class containing all of the different color combinations. Colors are
+ * made up of red, green, and blue. Light and dark values manipulate the
+ * colors' rgb values.
+ */
 public class Colors {
 
+	// The light value
 	private static float l = 1f;
+	// The dark value
 	private static float d = .5f;
+	// The alpha value (not really used)
 	private static float a = 1f;
 	
 	public static final Color BRIGHT_RED = new Color(l, 0, 0, a);
@@ -50,8 +58,10 @@ public class Colors {
 	public static final Color PALE_BLUE = new Color(d, d, l, a);
 	public static final Color SALMON = new Color(l, d, d, a);
 	
+	// A list containing all of the colors. Used for looping through to find a color.
 	public static List<Color> list = new ArrayList<Color>();
 	
+	// Static block that automatically adds all of the colors to the list.
 	static{
 		list.add(BRIGHT_RED);
 		list.add(BRIGHT_GREEN);
