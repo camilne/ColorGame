@@ -36,6 +36,8 @@ public class GuiOptions extends Gui implements Disposable{
 	private ComponentClickableButton back;
 	private ComponentClickableButton highscores;
 	
+	public boolean musicMuted = false;
+	
 	public GuiOptions(){
 		create();
 	}
@@ -77,7 +79,7 @@ public class GuiOptions extends Gui implements Disposable{
 
 			@Override
 			public void onClick() {
-				game.midiPlayer.setVolume(musicVolume.getValue());
+				game.music.setVolume(musicVolume.getValue());
 			}
 			
 		});
@@ -88,11 +90,13 @@ public class GuiOptions extends Gui implements Disposable{
 			
 			@Override
 			public void onClick() {
-				if(game.midiPlayer.isPlaying){
-					game.midiPlayer.stop();
+				if(!musicMuted){
+					musicMuted = true;
+					game.music.pause();
 					musicMute.setText("Unmute", 2);
 				}else{
-					game.midiPlayer.start();
+					musicMuted = false;
+					game.music.play();
 					musicMute.setText("Mute", 2);
 				}
 			}

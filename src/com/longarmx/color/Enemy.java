@@ -66,6 +66,9 @@ public class Enemy {
 	
 	public void render(SpriteBatch batch){
 		batch.enableBlending();
+		batch.setColor(0, 0, 0, 1);
+		batch.draw(textureTop, x + 1, yTop, 0, 0, 50, 25, 1, 1, -rotation);
+		batch.draw(textureBottom, x + 1, yBottom, 0, 0, 50, 25, 1, 1, rotation);
 		batch.setColor(red, green, blue, 1);
 		batch.draw(textureTop, x, yTop, 0, 0, 50, 25, 1, 1, -rotation);
 		batch.draw(textureBottom, x, yBottom, 0, 0, 50, 25, 1, 1, rotation);

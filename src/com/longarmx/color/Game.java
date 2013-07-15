@@ -22,6 +22,7 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,7 +38,9 @@ public class Game implements ApplicationListener{
 	List<Enemy> enemies = new ArrayList<Enemy>();
 	Color lastEnemyColor = new Color();
 	
-	int score = 0;
+	public int score = 0;
+	public int multiplier = 1;
+	
 	public int level = 1;
 	public int difficulty = 1;
 	
@@ -46,7 +49,7 @@ public class Game implements ApplicationListener{
 	public boolean soundMuted = false;
 	public float musicVolume = 1.0f;
 
-	MidiPlayer midiPlayer;
+	Music music;
 	
 	boolean paused = false;
 	
@@ -65,10 +68,8 @@ public class Game implements ApplicationListener{
 		background = Util.loadTexture("res/background.png");
 		overlay = Util.loadTexture("res/overlay.png");
 		
-		midiPlayer = new MidiPlayer("res/title_music.mid");
-		midiPlayer.setLooping(true);
-		midiPlayer.start();
-
+		startMusic();
+		
 		ui = new GuiGame();
 		title = new GuiTitle();
 		options = new GuiOptions();
@@ -87,11 +88,23 @@ public class Game implements ApplicationListener{
 		}
 		enemies.add(new Enemy());
 		lastEnemyColor = enemies.get(0).getColor();
-		player = new Player();
 		Enemy.SPEED = 1.0f * difficulty;
+		
+		player = new Player();
+		
 		level = difficulty;
+		
 		score = 0;
+		multiplier = 1;
+		
 		paused = false;
+	}
+	
+	public void startMusic(){
+		music = Gdx.audio.newMusic(Gdx.files.internal("res/title_music.ogg"));
+		music.setLooping(true);
+		music.setVolume(musicVolume);
+		music.play();
 	}
 
 	@Override
@@ -174,9 +187,9 @@ public class Game implements ApplicationListener{
 			
 			for(int i = 0; i < enemies.size(); i++){
 				if(enemies.get(i).forDestruction){
-					score++;
+					score += multiplier;
 					enemies.remove(i);
-					Enemy.SPEED += .2f;
+					Enemy.SPEED += .1f * difficulty;
 					enemies.add(new Enemy());
 					lastEnemyColor = enemies.get(enemies.size() - 1).getColor();
 				}else{
@@ -225,7 +238,7 @@ public class Game implements ApplicationListener{
 		batch.dispose();
 		background.dispose();
 		overlay.dispose();
-		midiPlayer.dispose();
+		music.dispose();
 		ui.dispose();
 		player.dispose();
 		Util.dispose();
