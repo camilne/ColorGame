@@ -1,9 +1,7 @@
 ColorGame
 =========
 
-The color game that I am developing
-
-Please visit: http://www.java-gaming.org/topics/color-game/29599/view.html
+Mix colors to match the enemy color and shoot.
 
 Color Combinations: Red (R), Green (G), Blue (B), Dark (D), Light (L)
 
